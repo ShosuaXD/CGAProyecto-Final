@@ -1,0 +1,32 @@
+Directorios de archivos de inclusion.
+..\external\glm
+..\external\glew\include
+..\external\glfw\include
+..\external\FreeImage\include
+..\external\assimp\include
+..\external\OpenAL/include
+..\external\freealut\include
+..\CGALib\include
+..\external\Freetype\include
+
+Directorios de archivos de bibliotecas.
+..\external\glew\lib\
+..\external\glfw\lib
+..\external\FreeImage\lib
+..\external\assimp\lib
+../external/OpenAL/lib
+..\external\freealut\lib
+..\external\Freetype\lib
+../Release
+
+Dependencias adicionales
+glew32d.lib
+glfw3.lib
+opengl32.lib
+glu32.lib
+assimp-vc140-mt.lib
+FreeImaged.lib
+alut.lib
+OpenAL32.lib
+CGALib.lib
+freetype.lib
