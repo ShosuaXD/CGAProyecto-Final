@@ -154,12 +154,20 @@ GL_TEXTURE_CUBE_MAP_NEGATIVE_Y,
 GL_TEXTURE_CUBE_MAP_POSITIVE_Z,
 GL_TEXTURE_CUBE_MAP_NEGATIVE_Z };
 
-std::string fileNames[6] = { "../Textures/mp_bloodvalley/blood-valley_ft.tga",
+/*std::string fileNames[6] = { "../Textures/mp_bloodvalley/blood-valley_ft.tga",
 		"../Textures/mp_bloodvalley/blood-valley_bk.tga",
 		"../Textures/mp_bloodvalley/blood-valley_up.tga",
 		"../Textures/mp_bloodvalley/blood-valley_dn.tga",
 		"../Textures/mp_bloodvalley/blood-valley_rt.tga",
-		"../Textures/mp_bloodvalley/blood-valley_lf.tga" };
+		"../Textures/mp_bloodvalley/blood-valley_lf.tga" };*/
+		// Agregamos las nuevas texturas del skybox.
+// Skybox del juego
+std::string fileNames[6] = { "../Textures/SwedishRoyalCastle/negz.jpg", // negz corresponde a la parte frontal del skybox
+		"../Textures/SwedishRoyalCastle/posz.jpg",						// posz corresponde a la parte trasera del skybox
+		"../Textures/SwedishRoyalCastle/posy.jpg",						// posy corresponde a la parte de arriba del skybox
+		"../Textures/SwedishRoyalCastle/negy.jpg",						// negy corresponde a la parte de abajo del skybox
+		"../Textures/SwedishRoyalCastle/posx.jpg",						// posx corresponde a la parte derecha del skybox
+		"../Textures/SwedishRoyalCastle/negx.jpg" };					// negx corresponde a la parte izquierda del skybox
 
 bool exitApp = false;
 int lastMousePosX, offsetX = 0;
