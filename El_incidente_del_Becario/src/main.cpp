@@ -122,12 +122,13 @@ Model modelLampPost2;
 Model modelGrass;
 // Fountain
 Model modelFountain;
-
+// Models of scene
 Model buildingTall, buildingWide, buildingSmall;
 Model Factory;
 Model goop, bubble;
+Model fanAnimated;
 Model tree;
-Model wallNorth, wallWest;
+Model wallNorthSouth, wallEastWest;
 Model pipes, grassSpots;
 
 // Model animate instance
@@ -218,7 +219,7 @@ int stateDoor = 0;
 float dorRotCount = 0.0;
 
 // buildingTall
-std::vector<glm::vec3> bTallPosition = { glm::vec3(-40, 0, 35.54), glm::vec3(
+/*std::vector<glm::vec3> bTallPosition = { glm::vec3(-40, 0, 35.54), glm::vec3(
 		-34.96, 0, 35.54), glm::vec3(-28.90, 0, 35.54),
 		glm::vec3(-40.03, 0, 41.79), glm::vec3(-34.96, 0, 41.79),
 		glm::vec3(-28.90, 0, 41.79), glm::vec3(-26.56, 0, -7.22),
@@ -226,7 +227,98 @@ std::vector<glm::vec3> bTallPosition = { glm::vec3(-40, 0, 35.54), glm::vec3(
 		glm::vec3(35.93, 0, -3.125), glm::vec3(35.93, 0, 4.29),
 		glm::vec3(42.57, 0, 41.21), glm::vec3(49.80, 0, 41.21),
 		glm::vec3(42.57, 0, 48.04), glm::vec3(49.8, 0, 48.04) };
-std::vector<float> bTallOrientation = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+std::vector<float> bTallOrientation = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };*/
+// Buildings positions and orientation
+std::vector<glm::vec3> positionBuildingTalls = { glm::vec3(-40.0390625f, 0.0f, 35.546875f),	// Edificio alto 1
+												 glm::vec3(-34.9609375f, 0.0f, 35.546875f),	// Edificio alto 2
+												 glm::vec3(-28.90625f, 0.0f, 35.546875f),	// Edificio alto 3
+												 glm::vec3(-40.0390625f, 0.0f, 41.796875f),	// Edificio alto 4
+												 glm::vec3(-34.9609375f, 0.0f, 41.796875f),	// Edificio alto 5
+												 glm::vec3(-28.90625f, 0.0f, 41.796875f),	// Edificio alto 6
+												 glm::vec3(-26.5625f, 0.0f, -7.2265625f),	// Edificio alto 7
+												 glm::vec3(-3.3203125f, 0.0f, -27.734375f),	// Edificio alto 8
+												 glm::vec3(8.3984375f, 0.0f, 15.4296875f),	// Edificio alto 9
+												 glm::vec3(35.9375f, 0.0f, -3.125f),		// Edificio alto 10
+												 glm::vec3(35.9375f, 0.0f, 4.296875f),		// Edificio alto 11
+												 glm::vec3(42.578125f, 0.0f, 41.2109375f),	// Edificio alto 12
+												 glm::vec3(49.8046875f, 0.0f, 41.2109375f),	// Edificio alto 13
+												 glm::vec3(42.578125f, 0.0f, 48.046875f),	// Edificio alto 14
+												 glm::vec3(49.8046875f, 0.0f, 48.046875f) };	// Edificio alto 15
+
+std::vector<glm::vec3> positionBuildingSmalls = { glm::vec3(-40.0390625f, 0.0f, 26.171875f),	// Edificio bajo 1
+												  glm::vec3(-15.4296875f, 0.0f, 7.2265625f),	// Edificio bajo 2
+												  glm::vec3(-22.8515625f, 0.0f, -20.8984375f),	// Edificio bajo 3
+												  glm::vec3(12.890625f, 0.0f, -47.0703125f),	// Edificio bajo 4
+												  glm::vec3(18.1640625f, 0.0f, -2.34375f),		// Edificio bajo 5
+												  glm::vec3(54.8828125f, 0.0f, 24.609375f) };	// Edificio bajo 6
+
+std::vector<glm::vec3> positionBuildingWides = { glm::vec3(-56.4453125f, 0.0f, 21.484375f),	// Edificio ancho 1
+												 glm::vec3(-42.578125f, 0.0f, -7.421875f),	// Edificio ancho 2
+												 glm::vec3(-15.625f, 0.0f, -45.8984375f),	// Edificio ancho 3
+												 glm::vec3(6.25f, 0.0f, 23.046875f),		// Edificio ancho 4
+												 glm::vec3(24.21875f, 0.0f, -58.203125f),	// Edificio ancho 5
+												 glm::vec3(45.5078125f, 0.0f, 57.8125f) };	// Edificio ancho 6
+
+std::vector<float> orientationBuildingWides = { 0.0f, 0.0f, 0.0f , 90.0f, 90.0f, 90.0f };	// Edificios anchos 1, 2, ... , 6. Eje Y
+
+std::vector<glm::vec3> positionFactories = { glm::vec3(-44.3359375f, 0.0f, -37.109375f),	// Edificio fabrica 1
+											 glm::vec3(41.9921875f, 0.0f, -25.9765625f),	// Edificio fabrica 2
+											 glm::vec3(14.2578125f, 0.0f, 43.9453125f) };	// Edificio fabrica 3
+
+std::vector<glm::vec3> positionFanAnimateds = { glm::vec3(-56.4453125f, 0.0f, 38.8671875f),		// Fan animado 1
+												glm::vec3(-54.4921875f, 0.0f, -13.8671875f),	// Fan animado 2
+												glm::vec3(38.8671875f, 0.0f, -58.7890625f),		// Fan animado 3
+												glm::vec3(25.0f, 0.0f, -2.734375f),				// Fan animado 4
+												glm::vec3(36.9140625f, 0.0f, 35.15625f) };		// Fan animado 5
+
+std::vector<float> orientationFanAnimateds = { 0.0f, -59.0f, -122.0f , 180.0f, 106.0f, };	// Fans animados 1, 2, ... , 6. Eje Y
+
+std::vector<glm::vec3> positionGoopPuddles = { glm::vec3(-54.1015625f, 0.0f, 32.6171875f),	// Charco 1
+											   glm::vec3(-59.375f, 0.0f, -1.3671875f),		// Charco 2
+											   glm::vec3(-29.6875f, 0.0f, 20.5078125f),		// Charco 3
+											   glm::vec3(-17.96875f, 0.0f, 49.609375f),		// Charco 4
+											   glm::vec3(-25.9765625f, 0.0f, -15.8203125f),	// Charco 5
+											   glm::vec3(-4.4921875f, 0.0f, 10.3515625f),	// Charco 6
+											   glm::vec3(-51.953125f, 0.0f, -50.78125f),	// Charco 7
+											   glm::vec3(-18.75f, 0.0f, -44.140625f),		// Charco 8
+											   glm::vec3(4.1015625f, 0.0f, -31.4453125f),	// Charco 9
+											   glm::vec3(23.046875f, 0.0f, -49.0234375f),	// Charco 10
+											   glm::vec3(19.140625f, 0.0f, -1.953125f),		// Charco 11
+											   glm::vec3(28.7109375f, 0.0f, 23.6328125f),	// Charco 12
+											   glm::vec3(51.5625f, 0.0f, 43.75f),			// Charco 13
+											   glm::vec3(59.375f, 0.0f, 0.0f),				// Charco 14
+											   glm::vec3(53.90625f, 0.0f, -48.828125f) };	// Charco 15
+
+std::vector<float> orientationGoopPuddles = { 0.0f, 32.0f, -25.0f, -68.0f, -76.0f, -60.0f, -60.0f, -60.0f, -76.0f, -41.0f,
+											  0.0f, -76.0f, -76.0f, 0.0f, 0.0f };	// Charcos 1, 2, 3, ... , 15. Eje Y
+
+std::vector<glm::vec3> positionTrees = { glm::vec3(-61.328125f, 0.0f, -4.4921875f),		// Arbol 1
+										 glm::vec3(-54.296875f, 0.0f, 54.4921875f),		// Arbol 2
+										 glm::vec3(-31.640625f, 0.0f, -2.734375f),		// Arbol 3
+										 glm::vec3(-13.8671875f, 0.0f, -55.2734375f),	// Arbol 4
+										 glm::vec3(-21.484375f, 0.0f, -27.1484375f),	// Arbol 5
+										 glm::vec3(-20.703125f, 0.0f, 13.4765625f),		// Arbol 6
+										 glm::vec3(-22.8515625f, 0.0f, 35.9375f),		// Arbol 7
+										 glm::vec3(-15.0390625f, 0.0f, 45.3125f),		// Arbol 8
+										 glm::vec3(-2.1484375f, 0.0f, 21.484375f),		// Arbol 9
+										 glm::vec3(-5.859375f, 0.0f, -5.2734375f),		// Arbol 10
+										 glm::vec3(2.9296875f, 0.0f, -25.0f),		// Arbol 11
+										 glm::vec3(7.421875f, 0.0f, -13.8671875f),	// Arbol 12
+										 glm::vec3(17.1875f, 0.0f, 16.015625f),		// Arbol 13
+										 glm::vec3(39.0625f, 0.0f, 18.1640625f),	// Arbol 14
+										 glm::vec3(44.53125f, 0.0f, -0.5859375f),	// Arbol 15
+										 glm::vec3(57.421875f, 0.0f, 45.703125f),	// Arbol 16
+										 glm::vec3(30.2734375f, 0.0f, -50.1953125f) };	// Arbol 17
+
+std::vector<glm::vec3> positionWallEastWests = { glm::vec3(-70.5078125f, 0.0f, 0.1953125f),		// Barda oeste
+												 glm::vec3(70.8984375f, 0.0f, 0.1953125f) };	// Barda este
+
+std::vector<glm::vec3> positionWallNorthSouths = { glm::vec3(0.1953125f, 0.0f, -69.7265625f),	// Barda norte
+												   glm::vec3(0.1953125f, 0.0f, 69.7265625f) };	// Barda sur
+
+// Variable para obtener medidas de escala y rotacion.
+float varUpdate = 2.0f;
+// bool buttomIsPress = false;
 
 std::vector<glm::vec3> lamp2Position = { glm::vec3(-36.52, 0, -23.24),
 		glm::vec3(-52.73, 0, -3.90) };
@@ -639,6 +731,22 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	//Buildings
 	buildingTall.loadModel("../models/projectModels/buildingTall.fbx");
 	buildingTall.setShader(&shaderMulLighting);
+	buildingSmall.loadModel("../models/projectModels/buildingSmall.fbx");
+	buildingSmall.setShader(&shaderMulLighting);
+	buildingWide.loadModel("../models/projectModels/buildingWide.fbx");
+	buildingWide.setShader(&shaderMulLighting);
+	Factory.loadModel("../models/projectModels/FactoryOneTex.fbx");
+	Factory.setShader(&shaderMulLighting);
+	fanAnimated.loadModel("../models/projectModels/fanAnimated.fbx");
+	fanAnimated.setShader(&shaderMulLighting);
+	goop.loadModel("../models/projectModels/GoopPuddle.fbx");
+	goop.setShader(&shaderMulLighting);
+	tree.loadModel("../models/projectModels/tree.fbx");
+	tree.setShader(&shaderMulLighting);
+	wallEastWest.loadModel("../models/projectModels/WallEastWest.fbx");
+	wallEastWest.setShader(&shaderMulLighting);
+	wallNorthSouth.loadModel("../models/projectModels/WallNorthSouth.fbx");
+	wallNorthSouth.setShader(&shaderMulLighting);
 
 	camera->setPosition(glm::vec3(0.0, 0.0, 10.0));
 	camera->setDistanceFromTarget(distanceFromTarget);
@@ -1189,6 +1297,9 @@ void destroy() {
 	shaderTerrain.destroy();
 	shaderParticlesFountain.destroy();
 	shaderParticlesFire.destroy();
+	shaderViewDepth.destroy();
+	shaderDepth.destroy();
+	shaderTextura.destroy();
 
 	// Basic objects Delete
 	skyboxSphere.destroy();
@@ -1229,6 +1340,17 @@ void destroy() {
 
 	// Custom objects animate
 	becariaModelAnimate.destroy();
+
+	// Buildings of scene
+	buildingTall.destroy();
+	buildingSmall.destroy();
+	buildingWide.destroy();
+	Factory.destroy();
+	fanAnimated.destroy();
+	goop.destroy();
+	tree.destroy();
+	wallEastWest.destroy();
+	wallNorthSouth.destroy();
 
 	// Textures Delete
 	glBindTexture(GL_TEXTURE_2D, 0);
@@ -1467,6 +1589,21 @@ bool processInput(bool continueApplication) {
 		modelMatrixbecaria = glm::translate(modelMatrixbecaria, glm::vec3(0, 0, -1.02));
 		animationIndex = 4;
 	}
+
+	if (glfwGetKey(window, GLFW_KEY_O) == GLFW_PRESS) {
+		// buttomIsPress = true;
+		varUpdate += 0.1f;
+	}
+	else if (glfwGetKey(window, GLFW_KEY_L) == GLFW_PRESS) {
+		// buttomIsPress = true;
+		varUpdate -= 0.1f;
+	}
+	/*else
+		buttomIsPress = false;*/
+	if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS)
+		std::cout << "scaleFactory = " << varUpdate << std::endl;
+	/*if (varUpdate >= 360.0f)
+		varUpdate = 0.0f;*/
 
 	bool keySpaceStatus = glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS;
 	if(!isJump && keySpaceStatus){
@@ -1841,12 +1978,14 @@ void applicationLoop() {
 		addOrUpdateColliders(collidersSBB, "rock", rockCollider, matrixModelRock);
 
 		// Lamps1 colliders
-		for (int i = 0; i < bTallPosition.size(); i++){
+		for (int i = 0; i < positionBuildingTalls.size(); i++){
 			AbstractModel::OBB lampCollider;
 			glm::mat4 modelMatrixColliderLamp = glm::mat4(1.0);
-			modelMatrixColliderLamp = glm::translate(modelMatrixColliderLamp, bTallPosition[i]);
-			modelMatrixColliderLamp = glm::rotate(modelMatrixColliderLamp, glm::radians(bTallOrientation[i]),
-					glm::vec3(0, 1, 0));
+			modelMatrixColliderLamp = glm::translate(modelMatrixColliderLamp, positionBuildingTalls[i]);
+			modelMatrixColliderLamp = glm::rotate(modelMatrixColliderLamp, glm::radians(-90.0f),
+					glm::vec3(1, 0, 0));
+			/*modelMatrixColliderLamp = glm::rotate(modelMatrixColliderLamp, glm::radians(bTallOrientation[i]),
+					glm::vec3(0, 1, 0));*/
 			addOrUpdateColliders(collidersOBB, "bTall-" + std::to_string(i), lampCollider, modelMatrixColliderLamp);
 			// Set the orientation of collider before doing the scale
 			lampCollider.u = glm::quat_cast(modelMatrixColliderLamp);
@@ -2202,6 +2341,17 @@ void prepareScene(){
 
 	//becaria
 	becariaModelAnimate.setShader(&shaderMulLighting);
+
+	// Buildings of scene
+	buildingTall.setShader(&shaderMulLighting);
+	buildingSmall.setShader(&shaderMulLighting);
+	buildingWide.setShader(&shaderMulLighting);
+	Factory.setShader(&shaderMulLighting);
+	fanAnimated.setShader(&shaderMulLighting);
+	goop.setShader(&shaderMulLighting);
+	tree.setShader(&shaderMulLighting);
+	wallEastWest.setShader(&shaderMulLighting);
+	wallNorthSouth.setShader(&shaderMulLighting);
 }
 
 void prepareDepthScene(){
@@ -2247,6 +2397,17 @@ void prepareDepthScene(){
 
 	//becaria
 	becariaModelAnimate.setShader(&shaderDepth);
+
+	// Buildings of scene
+	buildingTall.setShader(&shaderDepth);
+	buildingSmall.setShader(&shaderDepth);
+	buildingWide.setShader(&shaderDepth);
+	Factory.setShader(&shaderDepth);
+	fanAnimated.setShader(&shaderDepth);
+	goop.setShader(&shaderDepth);
+	tree.setShader(&shaderDepth);
+	wallEastWest.setShader(&shaderDepth);
+	wallNorthSouth.setShader(&shaderDepth);
 }
 
 void renderScene(bool renderParticles){
@@ -2290,15 +2451,75 @@ void renderScene(bool renderParticles){
 	// Forze to enable the unit texture to 0 always ----------------- IMPORTANT
 	glActiveTexture(GL_TEXTURE0);
 
-	// Render the lamps
-	for (int i = 0; i < bTallPosition.size(); i++){
-		bTallPosition[i].y = terrain.getHeightTerrain(bTallPosition[i].x, bTallPosition[i].z);
-		buildingTall.setPosition(bTallPosition[i]);
-		buildingTall.setScale(glm::vec3(2.0, 2.0, 2.0));
-		buildingTall.setOrientation(glm::vec3(0, bTallOrientation[i], 0));
+	/*********************************************
+	*  Render de los edificios de la escena
+	**********************************************/
+	// Edificios altos
+	for (int i = 0; i < positionBuildingTalls.size(); i++) {
+		positionBuildingTalls[i].y = terrain.getHeightTerrain(positionBuildingTalls[i].x, positionBuildingTalls[i].z);
+		buildingTall.setPosition(positionBuildingTalls[i]);
+		buildingTall.setScale(glm::vec3(2.0f, 2.0f, 2.0f));
+		buildingTall.setOrientation(glm::vec3(-90.0f, 0.0f, 0.0f));
 		buildingTall.render();
 	}
+	// Edificios bajos
+	for (int i = 0; i < positionBuildingSmalls.size(); i++) {
+		positionBuildingSmalls[i].y = terrain.getHeightTerrain(positionBuildingSmalls[i].x, positionBuildingSmalls[i].z);
+		buildingSmall.setPosition(positionBuildingSmalls[i]);
+		buildingSmall.setScale(glm::vec3(2.0f, 2.0f, 2.0f));
+		buildingSmall.setOrientation(glm::vec3(-90.0f, 0.0f, 0.0f));
+		buildingSmall.render();
+	}
+	// Edificios anchos
+	for (int i = 0; i < positionBuildingWides.size(); i++) {
+		positionBuildingWides[i].y = terrain.getHeightTerrain(positionBuildingWides[i].x, positionBuildingWides[i].z);
+		buildingWide.setPosition(positionBuildingWides[i]);
+		buildingWide.setScale(glm::vec3(2.0f, 2.0f, 2.0f));
+		buildingWide.setOrientation(glm::vec3(-90.0f, orientationBuildingWides[i], 0.0f));
+		buildingWide.render();
+	}
+	// Edificios fabricas
+	for (int i = 0; i < positionFactories.size(); i++) {
+		positionFactories[i].y = terrain.getHeightTerrain(positionFactories[i].x, positionFactories[i].z);
+		Factory.setPosition(positionFactories[i]);
+		Factory.setScale(glm::vec3(1.16f, 1.16f, 2.53f));
+		Factory.setOrientation(glm::vec3(-90.0f, 0.0f, 0.0f));
+		Factory.render();
+	}
+	// Fan animated
+	for (int i = 0; i < positionFanAnimateds.size(); i++) {
+		positionFanAnimateds[i].y = terrain.getHeightTerrain(positionFanAnimateds[i].x, positionFanAnimateds[i].z);
+		fanAnimated.setPosition(positionFanAnimateds[i]);
+		fanAnimated.setScale(glm::vec3(2.0f, 2.0f, 2.0f));
+		fanAnimated.setOrientation(glm::vec3(-90.0f, orientationFanAnimateds[i], 0.0f));
+		fanAnimated.render();
+	}
+	// Charcos
+	for (int i = 0; i < positionGoopPuddles.size(); i++) {
+		positionGoopPuddles[i].y = terrain.getHeightTerrain(positionGoopPuddles[i].x, positionGoopPuddles[i].z);
+		goop.setPosition(positionGoopPuddles[i]);
+		goop.setScale(glm::vec3(8.4f, 8.4f, 0.25f));
+		goop.setOrientation(glm::vec3(-90.0f, orientationGoopPuddles[i], 0.0f));
+		goop.render();
+	}
+	// Paredes este - oeste
+	for (int i = 0; i < positionWallEastWests.size(); i++) {
+		positionWallEastWests[i].y = terrain.getHeightTerrain(positionWallEastWests[i].x, positionWallEastWests[i].z);
+		wallEastWest.setPosition(positionWallEastWests[i]);
+		wallEastWest.setScale(glm::vec3(0.25f, 0.25f, 0.25f));
+		wallEastWest.setOrientation(glm::vec3(-90.0f, 0.0f, 0.0f));
+		wallEastWest.render();
+	}
+	// Pares norte - sur
+	for (int i = 0; i < positionWallNorthSouths.size(); i++) {
+		positionWallNorthSouths[i].y = terrain.getHeightTerrain(positionWallNorthSouths[i].x, positionWallNorthSouths[i].z);
+		wallNorthSouth.setPosition(positionWallNorthSouths[i]);
+		wallNorthSouth.setScale(glm::vec3(0.25f, 0.25f, 0.25f));
+		wallNorthSouth.setOrientation(glm::vec3(-90.0f, 0.0f, 0.0f));
+		wallNorthSouth.render();
+	}
 
+	// Render the lamps
 	for (int i = 0; i < lamp2Position.size(); i++){
 		lamp2Position[i].y = terrain.getHeightTerrain(lamp2Position[i].x, lamp2Position[i].z);
 		modelLamp2.setPosition(lamp2Position[i]);
@@ -2417,6 +2638,14 @@ void renderScene(bool renderParticles){
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glDisable(GL_CULL_FACE);
+	// Arboles
+	for (int i = 0; i < positionTrees.size(); i++) {
+		positionTrees[i].y = terrain.getHeightTerrain(positionTrees[i].x, positionTrees[i].z);
+		tree.setPosition(positionTrees[i]);
+		tree.setScale(glm::vec3(0.25f, 0.25f, 0.25f));
+		tree.setOrientation(glm::vec3(-90.0f, 0.0f, 0.0f));
+		tree.render();
+	}
 	for(std::map<float, std::pair<std::string, glm::vec3> >::reverse_iterator it = blendingSorted.rbegin(); it != blendingSorted.rend(); it++){
 		if(it->second.first.compare("aircraft") == 0){
 			// Render for the aircraft model
