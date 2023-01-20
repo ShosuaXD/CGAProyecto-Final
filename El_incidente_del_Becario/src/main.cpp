@@ -1942,40 +1942,40 @@ void applicationLoop() {
 		 * IMPORTANT do this before interpolations
 		 *******************************************/
 		// Collider del dart vader lego
-		glm::mat4 modelmatrixColliderDart = glm::mat4(modelMatrixDart);
-		AbstractModel::OBB dartLegoBodyCollider;
-		// Set the orientation of collider before doing the scale
-		dartLegoBodyCollider.u = glm::quat_cast(modelMatrixDart);
-		modelmatrixColliderDart = glm::scale(modelmatrixColliderDart, glm::vec3(0.5, 0.5, 0.5));
-		modelmatrixColliderDart = glm::translate(modelmatrixColliderDart,
-				glm::vec3(modelDartLegoBody.getObb().c.x,
-						modelDartLegoBody.getObb().c.y,
-						modelDartLegoBody.getObb().c.z));
-		dartLegoBodyCollider.c = glm::vec3(modelmatrixColliderDart[3]);
-		dartLegoBodyCollider.e = modelDartLegoBody.getObb().e * glm::vec3(0.5, 0.5, 0.5);
-		addOrUpdateColliders(collidersOBB, "dart", dartLegoBodyCollider, modelMatrixDart);
+		//glm::mat4 modelmatrixColliderDart = glm::mat4(modelMatrixDart);
+		//AbstractModel::OBB dartLegoBodyCollider;
+		//// Set the orientation of collider before doing the scale
+		//dartLegoBodyCollider.u = glm::quat_cast(modelMatrixDart);
+		//modelmatrixColliderDart = glm::scale(modelmatrixColliderDart, glm::vec3(0.5, 0.5, 0.5));
+		//modelmatrixColliderDart = glm::translate(modelmatrixColliderDart,
+		//		glm::vec3(modelDartLegoBody.getObb().c.x,
+		//				modelDartLegoBody.getObb().c.y,
+		//				modelDartLegoBody.getObb().c.z));
+		//dartLegoBodyCollider.c = glm::vec3(modelmatrixColliderDart[3]);
+		//dartLegoBodyCollider.e = modelDartLegoBody.getObb().e * glm::vec3(0.5, 0.5, 0.5);
+		//addOrUpdateColliders(collidersOBB, "dart", dartLegoBodyCollider, modelMatrixDart);
 
 		// Collider del aricraft
-		glm::mat4 modelMatrixColliderAircraft = glm::mat4(modelMatrixAircraft);
-		AbstractModel::OBB aircraftCollider;
-		// Set the orientation of collider before doing the scale
-		aircraftCollider.u = glm::quat_cast(modelMatrixAircraft);
-		modelMatrixColliderAircraft = glm::scale(modelMatrixColliderAircraft,
-				glm::vec3(1.0, 1.0, 1.0));
-		modelMatrixColliderAircraft = glm::translate(
-				modelMatrixColliderAircraft, modelAircraft.getObb().c);
-		aircraftCollider.c = glm::vec3(modelMatrixColliderAircraft[3]);
-		aircraftCollider.e = modelAircraft.getObb().e * glm::vec3(1.0, 1.0, 1.0);
-		addOrUpdateColliders(collidersOBB, "aircraft", aircraftCollider, modelMatrixAircraft);
+		//glm::mat4 modelMatrixColliderAircraft = glm::mat4(modelMatrixAircraft);
+		//AbstractModel::OBB aircraftCollider;
+		//// Set the orientation of collider before doing the scale
+		//aircraftCollider.u = glm::quat_cast(modelMatrixAircraft);
+		//modelMatrixColliderAircraft = glm::scale(modelMatrixColliderAircraft,
+		//		glm::vec3(1.0, 1.0, 1.0));
+		//modelMatrixColliderAircraft = glm::translate(
+		//		modelMatrixColliderAircraft, modelAircraft.getObb().c);
+		//aircraftCollider.c = glm::vec3(modelMatrixColliderAircraft[3]);
+		//aircraftCollider.e = modelAircraft.getObb().e * glm::vec3(1.0, 1.0, 1.0);
+		//addOrUpdateColliders(collidersOBB, "aircraft", aircraftCollider, modelMatrixAircraft);
 
 		//Collider del la rock
-		AbstractModel::SBB rockCollider;
+		/*AbstractModel::SBB rockCollider;
 		glm::mat4 modelMatrixColliderRock= glm::mat4(matrixModelRock);
 		modelMatrixColliderRock = glm::scale(modelMatrixColliderRock, glm::vec3(1.0, 1.0, 1.0));
 		modelMatrixColliderRock = glm::translate(modelMatrixColliderRock, modelRock.getSbb().c);
 		rockCollider.c = glm::vec3(modelMatrixColliderRock[3]);
 		rockCollider.ratio = modelRock.getSbb().ratio * 1.0;
-		addOrUpdateColliders(collidersSBB, "rock", rockCollider, matrixModelRock);
+		addOrUpdateColliders(collidersSBB, "rock", rockCollider, matrixModelRock);*/
 
 		// Lamps1 colliders
 		for (int i = 0; i < positionBuildingTalls.size(); i++){
@@ -1989,10 +1989,10 @@ void applicationLoop() {
 			addOrUpdateColliders(collidersOBB, "bTall-" + std::to_string(i), lampCollider, modelMatrixColliderLamp);
 			// Set the orientation of collider before doing the scale
 			lampCollider.u = glm::quat_cast(modelMatrixColliderLamp);
-			modelMatrixColliderLamp = glm::scale(modelMatrixColliderLamp, glm::vec3(2.0, 2.0, 2.0));
+			modelMatrixColliderLamp = glm::scale(modelMatrixColliderLamp, glm::vec3(2.0, 2.0, 4.0));
 			modelMatrixColliderLamp = glm::translate(modelMatrixColliderLamp, buildingTall.getObb().c);
 			lampCollider.c = glm::vec3(modelMatrixColliderLamp[3]);
-			lampCollider.e = buildingTall.getObb().e * glm::vec3(2.0, 2.0, 2.0);
+			lampCollider.e = buildingTall.getObb().e * glm::vec3(2.0, 2.0, 4.0);
 			std::get<0>(collidersOBB.find("bTall-" + std::to_string(i))->second) = lampCollider;
 		}
 
@@ -2028,6 +2028,115 @@ void applicationLoop() {
 		becariaCollider.e = becariaModelAnimate.getObb().e * glm::vec3(0.06, 0.06, 0.06) * glm::vec3(0.787401574, 0.787401574, 0.787401574);
 		becariaCollider.c = glm::vec3(modelmatrixColliderbecaria[3]);
 		addOrUpdateColliders(collidersOBB, "becaria", becariaCollider, modelMatrixbecaria);
+
+		//Collider builgingWide
+		for (int i = 0; i < positionBuildingWides.size(); i++) {
+			AbstractModel::OBB bWideCollider;
+			glm::mat4 modelMatrixColliderbWide = glm::mat4(1.0);
+			modelMatrixColliderbWide = glm::translate(modelMatrixColliderbWide, positionBuildingWides[i]);
+			modelMatrixColliderbWide = glm::rotate(modelMatrixColliderbWide, glm::radians(-90.0f),
+				glm::vec3(1, 0, 0));
+			/*modelMatrixColliderLamp = glm::rotate(modelMatrixColliderLamp, glm::radians(bTallOrientation[i]),
+					glm::vec3(0, 1, 0));*/
+			addOrUpdateColliders(collidersOBB, "bWide-" + std::to_string(i), bWideCollider, modelMatrixColliderbWide);
+			// Set the orientation of collider before doing the scale
+			bWideCollider.u = glm::quat_cast(modelMatrixColliderbWide);
+			modelMatrixColliderbWide = glm::scale(modelMatrixColliderbWide, glm::vec3(2.0, 2.0, 2.0));
+			modelMatrixColliderbWide = glm::translate(modelMatrixColliderbWide, buildingWide.getObb().c);
+			bWideCollider.c = glm::vec3(modelMatrixColliderbWide[3]);
+			bWideCollider.e = buildingWide.getObb().e * glm::vec3(2.0, 2.0, 2.0);
+			std::get<0>(collidersOBB.find("bWide-" + std::to_string(i))->second) = bWideCollider;
+		}
+		//Collider buildingSmall
+		for (int i = 0; i < positionBuildingSmalls.size(); i++) {
+			AbstractModel::OBB bSmallCollider;
+			glm::mat4 modelMatrixColliderbWide = glm::mat4(1.0);
+			modelMatrixColliderbWide = glm::translate(modelMatrixColliderbWide, positionBuildingSmalls[i]);
+			modelMatrixColliderbWide = glm::rotate(modelMatrixColliderbWide, glm::radians(-90.0f),
+				glm::vec3(1, 0, 0));
+			/*modelMatrixColliderLamp = glm::rotate(modelMatrixColliderLamp, glm::radians(bTallOrientation[i]),
+					glm::vec3(0, 1, 0));*/
+			addOrUpdateColliders(collidersOBB, "bSmall-" + std::to_string(i), bSmallCollider, modelMatrixColliderbWide);
+			// Set the orientation of collider before doing the scale
+			bSmallCollider.u = glm::quat_cast(modelMatrixColliderbWide);
+			modelMatrixColliderbWide = glm::scale(modelMatrixColliderbWide, glm::vec3(2.0, 2.0, 2.5));
+			modelMatrixColliderbWide = glm::translate(modelMatrixColliderbWide, glm::vec3(0.0, 0.0, -1.0));
+			modelMatrixColliderbWide = glm::translate(modelMatrixColliderbWide, buildingSmall.getObb().c);
+			bSmallCollider.c = glm::vec3(modelMatrixColliderbWide[3]);
+			bSmallCollider.e = buildingWide.getObb().e * glm::vec3(2.0, 2.0, 2.5);
+			std::get<0>(collidersOBB.find("bSmall-" + std::to_string(i))->second) = bSmallCollider;
+		}
+		//Collider paredes
+		for (int i = 0; i < positionWallEastWests.size(); i++) {
+			AbstractModel::OBB bSmallCollider;
+			glm::mat4 modelMatrixColliderbWide = glm::mat4(1.0);
+			modelMatrixColliderbWide = glm::translate(modelMatrixColliderbWide, positionWallEastWests[i]);
+			modelMatrixColliderbWide = glm::rotate(modelMatrixColliderbWide, glm::radians(-90.0f),
+				glm::vec3(1, 0, 0));
+			/*modelMatrixColliderLamp = glm::rotate(modelMatrixColliderLamp, glm::radians(bTallOrientation[i]),
+					glm::vec3(0, 1, 0));*/
+			addOrUpdateColliders(collidersOBB, "wallWE-" + std::to_string(i), bSmallCollider, modelMatrixColliderbWide);
+			// Set the orientation of collider before doing the scale
+			bSmallCollider.u = glm::quat_cast(modelMatrixColliderbWide);
+			modelMatrixColliderbWide = glm::scale(modelMatrixColliderbWide, glm::vec3(0.25f, 0.25f, 0.25f));
+			modelMatrixColliderbWide = glm::translate(modelMatrixColliderbWide, wallEastWest.getObb().c);
+			bSmallCollider.c = glm::vec3(modelMatrixColliderbWide[3]);
+			bSmallCollider.e = wallEastWest.getObb().e * glm::vec3(0.25f, 0.25f, 0.25f);
+			std::get<0>(collidersOBB.find("wallWE-" + std::to_string(i))->second) = bSmallCollider;
+		}
+		for (int i = 0; i < positionWallNorthSouths.size(); i++) {
+			AbstractModel::OBB bSmallCollider;
+			glm::mat4 modelMatrixColliderbWide = glm::mat4(1.0);
+			modelMatrixColliderbWide = glm::translate(modelMatrixColliderbWide, positionWallNorthSouths[i]);
+			modelMatrixColliderbWide = glm::rotate(modelMatrixColliderbWide, glm::radians(-90.0f),
+				glm::vec3(1, 0, 0));
+			/*modelMatrixColliderLamp = glm::rotate(modelMatrixColliderLamp, glm::radians(bTallOrientation[i]),
+					glm::vec3(0, 1, 0));*/
+			addOrUpdateColliders(collidersOBB, "wallNS-" + std::to_string(i), bSmallCollider, modelMatrixColliderbWide);
+			// Set the orientation of collider before doing the scale
+			bSmallCollider.u = glm::quat_cast(modelMatrixColliderbWide);
+			modelMatrixColliderbWide = glm::scale(modelMatrixColliderbWide, glm::vec3(0.25f, 0.25f, 0.25f));
+			modelMatrixColliderbWide = glm::translate(modelMatrixColliderbWide, wallNorthSouth.getObb().c);
+			bSmallCollider.c = glm::vec3(modelMatrixColliderbWide[3]);
+			bSmallCollider.e = wallNorthSouth.getObb().e * glm::vec3(0.25f, 0.25f, 0.25f);
+			std::get<0>(collidersOBB.find("wallNS-" + std::to_string(i))->second) = bSmallCollider;
+		}
+		//Collider factory
+		for (int i = 0; i < positionFactories.size(); i++) {
+			AbstractModel::OBB bSmallCollider;
+			glm::mat4 modelMatrixColliderbWide = glm::mat4(1.0);
+			modelMatrixColliderbWide = glm::translate(modelMatrixColliderbWide, positionFactories[i]);
+			modelMatrixColliderbWide = glm::rotate(modelMatrixColliderbWide, glm::radians(-90.0f),
+				glm::vec3(1, 0, 0));
+			/*modelMatrixColliderLamp = glm::rotate(modelMatrixColliderLamp, glm::radians(bTallOrientation[i]),
+					glm::vec3(0, 1, 0));*/
+			addOrUpdateColliders(collidersOBB, "factory-" + std::to_string(i), bSmallCollider, modelMatrixColliderbWide);
+			// Set the orientation of collider before doing the scale
+			bSmallCollider.u = glm::quat_cast(modelMatrixColliderbWide);
+			modelMatrixColliderbWide = glm::scale(modelMatrixColliderbWide, glm::vec3(1.16f, 1.16f, 6.53f));
+			modelMatrixColliderbWide = glm::translate(modelMatrixColliderbWide, Factory.getObb().c);
+			bSmallCollider.c = glm::vec3(modelMatrixColliderbWide[3]);
+			bSmallCollider.e = Factory.getObb().e * glm::vec3(1.16f, 1.16f, 6.53f);
+			std::get<0>(collidersOBB.find("factory-" + std::to_string(i))->second) = bSmallCollider;
+		}
+		//Collider Fan
+		for (int i = 0; i < positionFanAnimateds.size(); i++) {
+			AbstractModel::OBB bSmallCollider;
+			glm::mat4 modelMatrixColliderbWide = glm::mat4(1.0);
+			modelMatrixColliderbWide = glm::translate(modelMatrixColliderbWide, positionFanAnimateds[i]);
+			//modelMatrixColliderbWide = glm::rotate(modelMatrixColliderbWide, glm::radians(-90.0f),
+			//	glm::vec3(1, 0, 0));
+			modelMatrixColliderbWide = glm::rotate(modelMatrixColliderbWide, glm::radians(orientationFanAnimateds[i]),
+					glm::vec3(0, 1, 0));
+			addOrUpdateColliders(collidersOBB, "fan-" + std::to_string(i), bSmallCollider, modelMatrixColliderbWide);
+			// Set the orientation of collider before doing the scale
+			bSmallCollider.u = glm::quat_cast(modelMatrixColliderbWide);
+			modelMatrixColliderbWide = glm::scale(modelMatrixColliderbWide, glm::vec3(0.5f, 0.5f, 0.5f));
+			modelMatrixColliderbWide = glm::translate(modelMatrixColliderbWide, fanAnimated.getObb().c);
+			bSmallCollider.c = glm::vec3(modelMatrixColliderbWide[3]);
+			bSmallCollider.e = fanAnimated.getObb().e * glm::vec3(0.5f, 0.5f, 0.5f);
+			std::get<0>(collidersOBB.find("fan-" + std::to_string(i))->second) = bSmallCollider;
+		}
 
 		/*******************************************
 		 * Render de colliders
@@ -2446,8 +2555,8 @@ void renderScene(bool renderParticles){
 	 * Custom objects obj
 	 *******************************************/
 	//Rock render
-	matrixModelRock[3][1] = terrain.getHeightTerrain(matrixModelRock[3][0], matrixModelRock[3][2]);
-	modelRock.render(matrixModelRock);
+	/*matrixModelRock[3][1] = terrain.getHeightTerrain(matrixModelRock[3][0], matrixModelRock[3][2]);
+	modelRock.render(matrixModelRock);*/
 	// Forze to enable the unit texture to 0 always ----------------- IMPORTANT
 	glActiveTexture(GL_TEXTURE0);
 
@@ -2458,7 +2567,7 @@ void renderScene(bool renderParticles){
 	for (int i = 0; i < positionBuildingTalls.size(); i++) {
 		positionBuildingTalls[i].y = terrain.getHeightTerrain(positionBuildingTalls[i].x, positionBuildingTalls[i].z);
 		buildingTall.setPosition(positionBuildingTalls[i]);
-		buildingTall.setScale(glm::vec3(2.0f, 2.0f, 2.0f));
+		buildingTall.setScale(glm::vec3(2.0f, 2.0f, 4.0f));
 		buildingTall.setOrientation(glm::vec3(-90.0f, 0.0f, 0.0f));
 		buildingTall.render();
 	}
@@ -2482,16 +2591,18 @@ void renderScene(bool renderParticles){
 	for (int i = 0; i < positionFactories.size(); i++) {
 		positionFactories[i].y = terrain.getHeightTerrain(positionFactories[i].x, positionFactories[i].z);
 		Factory.setPosition(positionFactories[i]);
-		Factory.setScale(glm::vec3(1.16f, 1.16f, 2.53f));
+		Factory.setScale(glm::vec3(1.16f, 1.16f, 6.53f));
 		Factory.setOrientation(glm::vec3(-90.0f, 0.0f, 0.0f));
 		Factory.render();
 	}
 	// Fan animated
 	for (int i = 0; i < positionFanAnimateds.size(); i++) {
 		positionFanAnimateds[i].y = terrain.getHeightTerrain(positionFanAnimateds[i].x, positionFanAnimateds[i].z);
+		positionFanAnimateds[i].y += 50;
 		fanAnimated.setPosition(positionFanAnimateds[i]);
 		fanAnimated.setScale(glm::vec3(2.0f, 2.0f, 2.0f));
 		fanAnimated.setOrientation(glm::vec3(-90.0f, orientationFanAnimateds[i], 0.0f));
+		fanAnimated.setAnimationIndex(0);
 		fanAnimated.render();
 	}
 	// Charcos
@@ -2541,61 +2652,61 @@ void renderScene(bool renderParticles){
 	glEnable(GL_CULL_FACE);
 
 	// Fountain
-	glDisable(GL_CULL_FACE);
+	/*glDisable(GL_CULL_FACE);
 	modelFountain.render(modelMatrixFountain);
-	glEnable(GL_CULL_FACE);
+	glEnable(GL_CULL_FACE);*/
 
 	// Dart lego
 	// Se deshabilita el cull faces IMPORTANTE para la capa
-	glDisable(GL_CULL_FACE);
-	modelMatrixDart[3][1] = terrain.getHeightTerrain(modelMatrixDart[3][0], modelMatrixDart[3][2]);
-	glm::mat4 modelMatrixDartBody = glm::mat4(modelMatrixDart);
-	modelMatrixDartBody = glm::scale(modelMatrixDartBody, glm::vec3(0.5, 0.5, 0.5));
-	modelDartLegoBody.render(modelMatrixDartBody);
-	glm::mat4 modelMatrixDartHead = glm::mat4(modelMatrixDartBody);
-	modelMatrixDartHead = glm::rotate(modelMatrixDartHead, rotDartHead, glm::vec3(0, 1, 0));
-	modelDartLegoHead.render(modelMatrixDartHead);
-	modelDartLegoMask.render(modelMatrixDartHead);
-	glm::mat4 modelMatrixDartLeftArm = glm::mat4(modelMatrixDartBody);
-	modelMatrixDartLeftArm = glm::translate(modelMatrixDartLeftArm, glm::vec3(-0.023515, 2.43607, 0.446066));
-	modelMatrixDartLeftArm = glm::rotate(modelMatrixDartLeftArm, glm::radians(-5.0f), glm::vec3(1, 0, 0));
-	modelMatrixDartLeftArm = glm::rotate(modelMatrixDartLeftArm, rotDartLeftArm, glm::vec3(0, 0, 1));
-	modelMatrixDartLeftArm = glm::rotate(modelMatrixDartLeftArm, glm::radians(5.0f), glm::vec3(1, 0, 0));
-	modelMatrixDartLeftArm = glm::translate(modelMatrixDartLeftArm, glm::vec3(0.023515, -2.43607, -0.446066));
-	modelDartLegoLeftArm.render(modelMatrixDartLeftArm);
-	glm::mat4 modelMatrixDartLeftHand = glm::mat4(modelMatrixDartLeftArm);
-	modelMatrixDartLeftHand = glm::translate(modelMatrixDartLeftHand, glm::vec3(0.201343, 1.68317, 0.99774));
-	modelMatrixDartLeftHand = glm::rotate(modelMatrixDartLeftHand, glm::radians(-5.0f), glm::vec3(1, 0, 0));
-	modelMatrixDartLeftHand = glm::rotate(modelMatrixDartLeftHand, rotDartLeftHand, glm::vec3(0, 1, 0));
-	modelMatrixDartLeftHand = glm::rotate(modelMatrixDartLeftHand, glm::radians(5.0f), glm::vec3(1, 0, 0));
-	modelMatrixDartLeftHand = glm::translate(modelMatrixDartLeftHand, glm::vec3(-0.201343, -1.68317, -0.99774));
-	modelDartLegoLeftHand.render(modelMatrixDartLeftHand);
-	glm::mat4 modelMatrixDartRightArm = glm::mat4(modelMatrixDartBody);
-	modelMatrixDartRightArm = glm::translate(modelMatrixDartRightArm, glm::vec3(-0.023515, 2.43607, -0.446066));
-	modelMatrixDartRightArm = glm::rotate(modelMatrixDartRightArm, glm::radians(5.0f), glm::vec3(1, 0, 0));
-	modelMatrixDartRightArm = glm::rotate(modelMatrixDartRightArm, rotDartRightArm, glm::vec3(0, 0, 1));
-	modelMatrixDartRightArm = glm::rotate(modelMatrixDartRightArm, glm::radians(-5.0f), glm::vec3(1, 0, 0));
-	modelMatrixDartRightArm = glm::translate(modelMatrixDartRightArm, glm::vec3(0.023515, -2.43607, 0.446066));
-	modelDartLegoRightArm.render(modelMatrixDartRightArm);
-	glm::mat4 modelMatrixDartRightHand = glm::mat4(modelMatrixDartRightArm);
-	modelMatrixDartRightHand = glm::translate(modelMatrixDartRightHand, glm::vec3(0.201343, 1.68317, -0.99774));
-	modelMatrixDartRightHand = glm::rotate(modelMatrixDartRightHand, glm::radians(5.0f), glm::vec3(1, 0, 0));
-	modelMatrixDartRightHand = glm::rotate(modelMatrixDartRightHand, rotDartRightHand, glm::vec3(0, 1, 0));
-	modelMatrixDartRightHand = glm::rotate(modelMatrixDartRightHand, glm::radians(-5.0f), glm::vec3(1, 0, 0));
-	modelMatrixDartRightHand = glm::translate(modelMatrixDartRightHand, glm::vec3(-0.201343, -1.68317, 0.99774));
-	modelDartLegoRightHand.render(modelMatrixDartRightHand);
-	glm::mat4 modelMatrixDartLeftLeg = glm::mat4(modelMatrixDartBody);
-	modelMatrixDartLeftLeg = glm::translate(modelMatrixDartLeftLeg, glm::vec3(0, 1.12632, 0.423349));
-	modelMatrixDartLeftLeg = glm::rotate(modelMatrixDartLeftLeg, rotDartLeftLeg, glm::vec3(0, 0, 1));
-	modelMatrixDartLeftLeg = glm::translate(modelMatrixDartLeftLeg, glm::vec3(0, -1.12632, -0.423349));
-	modelDartLegoLeftLeg.render(modelMatrixDartLeftLeg);
-	glm::mat4 modelMatrixDartRightLeg = glm::mat4(modelMatrixDartBody);
-	modelMatrixDartRightLeg = glm::translate(modelMatrixDartRightLeg, glm::vec3(0, 1.12632, -0.423349));
-	modelMatrixDartRightLeg = glm::rotate(modelMatrixDartRightLeg, rotDartRightLeg, glm::vec3(0, 0, 1));
-	modelMatrixDartRightLeg = glm::translate(modelMatrixDartRightLeg, glm::vec3(0, -1.12632, 0.423349));
-	modelDartLegoRightLeg.render(modelMatrixDartRightLeg);
-	// Se regresa el cull faces IMPORTANTE para la capa
-	glEnable(GL_CULL_FACE);
+	//glDisable(GL_CULL_FACE);
+	//modelMatrixDart[3][1] = terrain.getHeightTerrain(modelMatrixDart[3][0], modelMatrixDart[3][2]);
+	//glm::mat4 modelMatrixDartBody = glm::mat4(modelMatrixDart);
+	//modelMatrixDartBody = glm::scale(modelMatrixDartBody, glm::vec3(0.5, 0.5, 0.5));
+	//modelDartLegoBody.render(modelMatrixDartBody);
+	//glm::mat4 modelMatrixDartHead = glm::mat4(modelMatrixDartBody);
+	//modelMatrixDartHead = glm::rotate(modelMatrixDartHead, rotDartHead, glm::vec3(0, 1, 0));
+	//modelDartLegoHead.render(modelMatrixDartHead);
+	//modelDartLegoMask.render(modelMatrixDartHead);
+	//glm::mat4 modelMatrixDartLeftArm = glm::mat4(modelMatrixDartBody);
+	//modelMatrixDartLeftArm = glm::translate(modelMatrixDartLeftArm, glm::vec3(-0.023515, 2.43607, 0.446066));
+	//modelMatrixDartLeftArm = glm::rotate(modelMatrixDartLeftArm, glm::radians(-5.0f), glm::vec3(1, 0, 0));
+	//modelMatrixDartLeftArm = glm::rotate(modelMatrixDartLeftArm, rotDartLeftArm, glm::vec3(0, 0, 1));
+	//modelMatrixDartLeftArm = glm::rotate(modelMatrixDartLeftArm, glm::radians(5.0f), glm::vec3(1, 0, 0));
+	//modelMatrixDartLeftArm = glm::translate(modelMatrixDartLeftArm, glm::vec3(0.023515, -2.43607, -0.446066));
+	//modelDartLegoLeftArm.render(modelMatrixDartLeftArm);
+	//glm::mat4 modelMatrixDartLeftHand = glm::mat4(modelMatrixDartLeftArm);
+	//modelMatrixDartLeftHand = glm::translate(modelMatrixDartLeftHand, glm::vec3(0.201343, 1.68317, 0.99774));
+	//modelMatrixDartLeftHand = glm::rotate(modelMatrixDartLeftHand, glm::radians(-5.0f), glm::vec3(1, 0, 0));
+	//modelMatrixDartLeftHand = glm::rotate(modelMatrixDartLeftHand, rotDartLeftHand, glm::vec3(0, 1, 0));
+	//modelMatrixDartLeftHand = glm::rotate(modelMatrixDartLeftHand, glm::radians(5.0f), glm::vec3(1, 0, 0));
+	//modelMatrixDartLeftHand = glm::translate(modelMatrixDartLeftHand, glm::vec3(-0.201343, -1.68317, -0.99774));
+	//modelDartLegoLeftHand.render(modelMatrixDartLeftHand);
+	//glm::mat4 modelMatrixDartRightArm = glm::mat4(modelMatrixDartBody);
+	//modelMatrixDartRightArm = glm::translate(modelMatrixDartRightArm, glm::vec3(-0.023515, 2.43607, -0.446066));
+	//modelMatrixDartRightArm = glm::rotate(modelMatrixDartRightArm, glm::radians(5.0f), glm::vec3(1, 0, 0));
+	//modelMatrixDartRightArm = glm::rotate(modelMatrixDartRightArm, rotDartRightArm, glm::vec3(0, 0, 1));
+	//modelMatrixDartRightArm = glm::rotate(modelMatrixDartRightArm, glm::radians(-5.0f), glm::vec3(1, 0, 0));
+	//modelMatrixDartRightArm = glm::translate(modelMatrixDartRightArm, glm::vec3(0.023515, -2.43607, 0.446066));
+	//modelDartLegoRightArm.render(modelMatrixDartRightArm);
+	//glm::mat4 modelMatrixDartRightHand = glm::mat4(modelMatrixDartRightArm);
+	//modelMatrixDartRightHand = glm::translate(modelMatrixDartRightHand, glm::vec3(0.201343, 1.68317, -0.99774));
+	//modelMatrixDartRightHand = glm::rotate(modelMatrixDartRightHand, glm::radians(5.0f), glm::vec3(1, 0, 0));
+	//modelMatrixDartRightHand = glm::rotate(modelMatrixDartRightHand, rotDartRightHand, glm::vec3(0, 1, 0));
+	//modelMatrixDartRightHand = glm::rotate(modelMatrixDartRightHand, glm::radians(-5.0f), glm::vec3(1, 0, 0));
+	//modelMatrixDartRightHand = glm::translate(modelMatrixDartRightHand, glm::vec3(-0.201343, -1.68317, 0.99774));
+	//modelDartLegoRightHand.render(modelMatrixDartRightHand);
+	//glm::mat4 modelMatrixDartLeftLeg = glm::mat4(modelMatrixDartBody);
+	//modelMatrixDartLeftLeg = glm::translate(modelMatrixDartLeftLeg, glm::vec3(0, 1.12632, 0.423349));
+	//modelMatrixDartLeftLeg = glm::rotate(modelMatrixDartLeftLeg, rotDartLeftLeg, glm::vec3(0, 0, 1));
+	//modelMatrixDartLeftLeg = glm::translate(modelMatrixDartLeftLeg, glm::vec3(0, -1.12632, -0.423349));
+	//modelDartLegoLeftLeg.render(modelMatrixDartLeftLeg);
+	//glm::mat4 modelMatrixDartRightLeg = glm::mat4(modelMatrixDartBody);
+	//modelMatrixDartRightLeg = glm::translate(modelMatrixDartRightLeg, glm::vec3(0, 1.12632, -0.423349));
+	//modelMatrixDartRightLeg = glm::rotate(modelMatrixDartRightLeg, rotDartRightLeg, glm::vec3(0, 0, 1));
+	//modelMatrixDartRightLeg = glm::translate(modelMatrixDartRightLeg, glm::vec3(0, -1.12632, 0.423349));
+	//modelDartLegoRightLeg.render(modelMatrixDartRightLeg);
+	//// Se regresa el cull faces IMPORTANTE para la capa
+	//glEnable(GL_CULL_FACE);
 
 	/*******************************************
 	 * Custom Anim objects obj
@@ -2649,128 +2760,128 @@ void renderScene(bool renderParticles){
 	for(std::map<float, std::pair<std::string, glm::vec3> >::reverse_iterator it = blendingSorted.rbegin(); it != blendingSorted.rend(); it++){
 		if(it->second.first.compare("aircraft") == 0){
 			// Render for the aircraft model
-			glm::mat4 modelMatrixAircraftBlend = glm::mat4(modelMatrixAircraft);
+			/*glm::mat4 modelMatrixAircraftBlend = glm::mat4(modelMatrixAircraft);
 			modelMatrixAircraftBlend[3][1] = terrain.getHeightTerrain(modelMatrixAircraftBlend[3][0], modelMatrixAircraftBlend[3][2]) + 2.0;
-			modelAircraft.render(modelMatrixAircraftBlend);
+			modelAircraft.render(modelMatrixAircraftBlend);*/
 		}
-		else if(it->second.first.compare("lambo") == 0){
-			// Lambo car
-			glm::mat4 modelMatrixLamboBlend = glm::mat4(modelMatrixLambo);
-			modelMatrixLamboBlend[3][1] = terrain.getHeightTerrain(modelMatrixLamboBlend[3][0], modelMatrixLamboBlend[3][2]);
-			modelMatrixLamboBlend = glm::scale(modelMatrixLamboBlend, glm::vec3(1.3, 1.3, 1.3));
-			modelLambo.render(modelMatrixLamboBlend);
-			glActiveTexture(GL_TEXTURE0);
-			glm::mat4 modelMatrixLamboLeftDor = glm::mat4(modelMatrixLamboBlend);
-			modelMatrixLamboLeftDor = glm::translate(modelMatrixLamboLeftDor, glm::vec3(1.08676, 0.707316, 0.982601));
-			modelMatrixLamboLeftDor = glm::rotate(modelMatrixLamboLeftDor, glm::radians(dorRotCount), glm::vec3(1.0, 0, 0));
-			modelMatrixLamboLeftDor = glm::translate(modelMatrixLamboLeftDor, glm::vec3(-1.08676, -0.707316, -0.982601));
-			modelLamboLeftDor.render(modelMatrixLamboLeftDor);
-			modelLamboRightDor.render(modelMatrixLamboBlend);
-			modelLamboFrontLeftWheel.render(modelMatrixLamboBlend);
-			modelLamboFrontRightWheel.render(modelMatrixLamboBlend);
-			modelLamboRearLeftWheel.render(modelMatrixLamboBlend);
-			modelLamboRearRightWheel.render(modelMatrixLamboBlend);
-			// Se regresa el cull faces IMPORTANTE para las puertas
-		}
-		else if(it->second.first.compare("heli") == 0){
-			// Helicopter
-			glm::mat4 modelMatrixHeliChasis = glm::mat4(modelMatrixHeli);
-			modelHeliChasis.render(modelMatrixHeliChasis);
+		//else if(it->second.first.compare("lambo") == 0){
+		//	// Lambo car
+		//	glm::mat4 modelMatrixLamboBlend = glm::mat4(modelMatrixLambo);
+		//	modelMatrixLamboBlend[3][1] = terrain.getHeightTerrain(modelMatrixLamboBlend[3][0], modelMatrixLamboBlend[3][2]);
+		//	modelMatrixLamboBlend = glm::scale(modelMatrixLamboBlend, glm::vec3(1.3, 1.3, 1.3));
+		//	modelLambo.render(modelMatrixLamboBlend);
+		//	glActiveTexture(GL_TEXTURE0);
+		//	glm::mat4 modelMatrixLamboLeftDor = glm::mat4(modelMatrixLamboBlend);
+		//	modelMatrixLamboLeftDor = glm::translate(modelMatrixLamboLeftDor, glm::vec3(1.08676, 0.707316, 0.982601));
+		//	modelMatrixLamboLeftDor = glm::rotate(modelMatrixLamboLeftDor, glm::radians(dorRotCount), glm::vec3(1.0, 0, 0));
+		//	modelMatrixLamboLeftDor = glm::translate(modelMatrixLamboLeftDor, glm::vec3(-1.08676, -0.707316, -0.982601));
+		//	modelLamboLeftDor.render(modelMatrixLamboLeftDor);
+		//	modelLamboRightDor.render(modelMatrixLamboBlend);
+		//	modelLamboFrontLeftWheel.render(modelMatrixLamboBlend);
+		//	modelLamboFrontRightWheel.render(modelMatrixLamboBlend);
+		//	modelLamboRearLeftWheel.render(modelMatrixLamboBlend);
+		//	modelLamboRearRightWheel.render(modelMatrixLamboBlend);
+		//	// Se regresa el cull faces IMPORTANTE para las puertas
+		//}
+		//else if(it->second.first.compare("heli") == 0){
+		//	// Helicopter
+		//	glm::mat4 modelMatrixHeliChasis = glm::mat4(modelMatrixHeli);
+		//	modelHeliChasis.render(modelMatrixHeliChasis);
 
-			glm::mat4 modelMatrixHeliHeli = glm::mat4(modelMatrixHeliChasis);
-			modelMatrixHeliHeli = glm::translate(modelMatrixHeliHeli, glm::vec3(0.0, 0.0, -0.249548));
-			modelMatrixHeliHeli = glm::rotate(modelMatrixHeliHeli, rotHelHelY, glm::vec3(0, 1, 0));
-			modelMatrixHeliHeli = glm::translate(modelMatrixHeliHeli, glm::vec3(0.0, 0.0, 0.249548));
-			modelHeliHeli.render(modelMatrixHeliHeli);
-		}
-		else if(renderParticles && it->second.first.compare("fountain") == 0){
-			/**********
-			 * Init Render particles systems
-			 */
-			glm::mat4 modelMatrixParticlesFountain = glm::mat4(1.0);
-			modelMatrixParticlesFountain = glm::translate(modelMatrixParticlesFountain, it->second.second);
-			modelMatrixParticlesFountain[3][1] = terrain.getHeightTerrain(modelMatrixParticlesFountain[3][0], modelMatrixParticlesFountain[3][2]) + 0.36 * 10.0;
-			modelMatrixParticlesFountain = glm::scale(modelMatrixParticlesFountain, glm::vec3(3.0, 3.0, 3.0));
-			currTimeParticlesAnimation = TimeManager::Instance().GetTime();
-			if(currTimeParticlesAnimation - lastTimeParticlesAnimation > 10.0)
-				lastTimeParticlesAnimation = currTimeParticlesAnimation;
-			//glDisable(GL_DEPTH_TEST);
-			glDepthMask(GL_FALSE);
-			// Set the point size
-			glPointSize(10.0f);
-			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, textureParticleFountainID);
-			shaderParticlesFountain.turnOn();
-			shaderParticlesFountain.setFloat("Time", float(currTimeParticlesAnimation - lastTimeParticlesAnimation));
-			shaderParticlesFountain.setFloat("ParticleLifetime", 3.5f);
-			shaderParticlesFountain.setInt("ParticleTex", 0);
-			shaderParticlesFountain.setVectorFloat3("Gravity", glm::value_ptr(glm::vec3(0.0f, -0.3f, 0.0f)));
-			shaderParticlesFountain.setMatrix4("model", 1, false, glm::value_ptr(modelMatrixParticlesFountain));
-			glBindVertexArray(VAOParticles);
-			glDrawArrays(GL_POINTS, 0, nParticles);
-			glDepthMask(GL_TRUE);
-			//glEnable(GL_DEPTH_TEST);
-			shaderParticlesFountain.turnOff();
-			/**********
-			 * End Render particles systems
-			 */
-		}
-		else if(renderParticles && it->second.first.compare("fire") == 0){
-			/**********
-			 * Init Render particles systems
-			 */
-			lastTimeParticlesAnimationFire = currTimeParticlesAnimationFire;
-			currTimeParticlesAnimationFire = TimeManager::Instance().GetTime();
+		//	glm::mat4 modelMatrixHeliHeli = glm::mat4(modelMatrixHeliChasis);
+		//	modelMatrixHeliHeli = glm::translate(modelMatrixHeliHeli, glm::vec3(0.0, 0.0, -0.249548));
+		//	modelMatrixHeliHeli = glm::rotate(modelMatrixHeliHeli, rotHelHelY, glm::vec3(0, 1, 0));
+		//	modelMatrixHeliHeli = glm::translate(modelMatrixHeliHeli, glm::vec3(0.0, 0.0, 0.249548));
+		//	modelHeliHeli.render(modelMatrixHeliHeli);
+		//}
+		//else if(renderParticles && it->second.first.compare("fountain") == 0){
+		//	/**********
+		//	 * Init Render particles systems
+		//	 */
+		//	glm::mat4 modelMatrixParticlesFountain = glm::mat4(1.0);
+		//	modelMatrixParticlesFountain = glm::translate(modelMatrixParticlesFountain, it->second.second);
+		//	modelMatrixParticlesFountain[3][1] = terrain.getHeightTerrain(modelMatrixParticlesFountain[3][0], modelMatrixParticlesFountain[3][2]) + 0.36 * 10.0;
+		//	modelMatrixParticlesFountain = glm::scale(modelMatrixParticlesFountain, glm::vec3(3.0, 3.0, 3.0));
+		//	currTimeParticlesAnimation = TimeManager::Instance().GetTime();
+		//	if(currTimeParticlesAnimation - lastTimeParticlesAnimation > 10.0)
+		//		lastTimeParticlesAnimation = currTimeParticlesAnimation;
+		//	//glDisable(GL_DEPTH_TEST);
+		//	glDepthMask(GL_FALSE);
+		//	// Set the point size
+		//	glPointSize(10.0f);
+		//	glActiveTexture(GL_TEXTURE0);
+		//	glBindTexture(GL_TEXTURE_2D, textureParticleFountainID);
+		//	shaderParticlesFountain.turnOn();
+		//	shaderParticlesFountain.setFloat("Time", float(currTimeParticlesAnimation - lastTimeParticlesAnimation));
+		//	shaderParticlesFountain.setFloat("ParticleLifetime", 3.5f);
+		//	shaderParticlesFountain.setInt("ParticleTex", 0);
+		//	shaderParticlesFountain.setVectorFloat3("Gravity", glm::value_ptr(glm::vec3(0.0f, -0.3f, 0.0f)));
+		//	shaderParticlesFountain.setMatrix4("model", 1, false, glm::value_ptr(modelMatrixParticlesFountain));
+		//	glBindVertexArray(VAOParticles);
+		//	glDrawArrays(GL_POINTS, 0, nParticles);
+		//	glDepthMask(GL_TRUE);
+		//	//glEnable(GL_DEPTH_TEST);
+		//	shaderParticlesFountain.turnOff();
+		//	/**********
+		//	 * End Render particles systems
+		//	 */
+		//}
+		//else if(renderParticles && it->second.first.compare("fire") == 0){
+		//	/**********
+		//	 * Init Render particles systems
+		//	 */
+		//	lastTimeParticlesAnimationFire = currTimeParticlesAnimationFire;
+		//	currTimeParticlesAnimationFire = TimeManager::Instance().GetTime();
 
-			shaderParticlesFire.setInt("Pass", 1);
-			shaderParticlesFire.setFloat("Time", currTimeParticlesAnimationFire);
-			shaderParticlesFire.setFloat("DeltaT", currTimeParticlesAnimationFire - lastTimeParticlesAnimationFire);
+		//	shaderParticlesFire.setInt("Pass", 1);
+		//	shaderParticlesFire.setFloat("Time", currTimeParticlesAnimationFire);
+		//	shaderParticlesFire.setFloat("DeltaT", currTimeParticlesAnimationFire - lastTimeParticlesAnimationFire);
 
-			glActiveTexture(GL_TEXTURE1);
-			glBindTexture(GL_TEXTURE_1D, texId);
-			glEnable(GL_RASTERIZER_DISCARD);
-			glBindTransformFeedback(GL_TRANSFORM_FEEDBACK, feedback[drawBuf]);
-			glBeginTransformFeedback(GL_POINTS);
-			glBindVertexArray(particleArray[1-drawBuf]);
-			glVertexAttribDivisor(0,0);
-			glVertexAttribDivisor(1,0);
-			glVertexAttribDivisor(2,0);
-			glDrawArrays(GL_POINTS, 0, nParticlesFire);
-			glEndTransformFeedback();
-			glDisable(GL_RASTERIZER_DISCARD);
+		//	glActiveTexture(GL_TEXTURE1);
+		//	glBindTexture(GL_TEXTURE_1D, texId);
+		//	glEnable(GL_RASTERIZER_DISCARD);
+		//	glBindTransformFeedback(GL_TRANSFORM_FEEDBACK, feedback[drawBuf]);
+		//	glBeginTransformFeedback(GL_POINTS);
+		//	glBindVertexArray(particleArray[1-drawBuf]);
+		//	glVertexAttribDivisor(0,0);
+		//	glVertexAttribDivisor(1,0);
+		//	glVertexAttribDivisor(2,0);
+		//	glDrawArrays(GL_POINTS, 0, nParticlesFire);
+		//	glEndTransformFeedback();
+		//	glDisable(GL_RASTERIZER_DISCARD);
 
-			shaderParticlesFire.setInt("Pass", 2);
-			glm::mat4 modelFireParticles = glm::mat4(1.0);
-			modelFireParticles = glm::translate(modelFireParticles, it->second.second);
-			modelFireParticles[3][1] = terrain.getHeightTerrain(modelFireParticles[3][0], modelFireParticles[3][2]);
-			shaderParticlesFire.setMatrix4("model", 1, false, glm::value_ptr(modelFireParticles));
+		//	shaderParticlesFire.setInt("Pass", 2);
+		//	glm::mat4 modelFireParticles = glm::mat4(1.0);
+		//	modelFireParticles = glm::translate(modelFireParticles, it->second.second);
+		//	modelFireParticles[3][1] = terrain.getHeightTerrain(modelFireParticles[3][0], modelFireParticles[3][2]);
+		//	shaderParticlesFire.setMatrix4("model", 1, false, glm::value_ptr(modelFireParticles));
 
-			shaderParticlesFire.turnOn();
-			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, textureParticleFireID);
-			glDepthMask(GL_FALSE);
-			glBindVertexArray(particleArray[drawBuf]);
-			glVertexAttribDivisor(0,1);
-			glVertexAttribDivisor(1,1);
-			glVertexAttribDivisor(2,1);
-			glDrawArraysInstanced(GL_TRIANGLES, 0, 6, nParticlesFire);
-			glBindVertexArray(0);
-			glDepthMask(GL_TRUE);
-			drawBuf = 1 - drawBuf;
-			shaderParticlesFire.turnOff();
+		//	shaderParticlesFire.turnOn();
+		//	glActiveTexture(GL_TEXTURE0);
+		//	glBindTexture(GL_TEXTURE_2D, textureParticleFireID);
+		//	glDepthMask(GL_FALSE);
+		//	glBindVertexArray(particleArray[drawBuf]);
+		//	glVertexAttribDivisor(0,1);
+		//	glVertexAttribDivisor(1,1);
+		//	glVertexAttribDivisor(2,1);
+		//	glDrawArraysInstanced(GL_TRIANGLES, 0, 6, nParticlesFire);
+		//	glBindVertexArray(0);
+		//	glDepthMask(GL_TRUE);
+		//	drawBuf = 1 - drawBuf;
+		//	shaderParticlesFire.turnOff();
 
-			/****************************+
-			 * Open AL sound data
-			 */
-			source1Pos[0] = modelFireParticles[3].x;
-			source1Pos[1] = modelFireParticles[3].y;
-			source1Pos[2] = modelFireParticles[3].z;
-			alSourcefv(source[1], AL_POSITION, source1Pos);
+		//	/****************************+
+		//	 * Open AL sound data
+		//	 */
+		//	source1Pos[0] = modelFireParticles[3].x;
+		//	source1Pos[1] = modelFireParticles[3].y;
+		//	source1Pos[2] = modelFireParticles[3].z;
+		//	alSourcefv(source[1], AL_POSITION, source1Pos);
 
-			/**********
-			 * End Render particles systems
-			 */
-		}
+		//	/**********
+		//	 * End Render particles systems
+		//	 */
+		//}
 
 	}
 	glEnable(GL_CULL_FACE);
