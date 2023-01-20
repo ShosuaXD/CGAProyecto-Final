@@ -227,6 +227,7 @@ std::vector<glm::vec3> bTallPosition = { glm::vec3(-40, 0, 35.54), glm::vec3(
 		glm::vec3(42.57, 0, 41.21), glm::vec3(49.80, 0, 41.21),
 		glm::vec3(42.57, 0, 48.04), glm::vec3(49.8, 0, 48.04) };
 std::vector<float> bTallOrientation = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
 std::vector<glm::vec3> lamp2Position = { glm::vec3(-36.52, 0, -23.24),
 		glm::vec3(-52.73, 0, -3.90) };
 std::vector<float> lamp2Orientation = {21.37 + 90, -65.0 + 90};
@@ -1460,10 +1461,10 @@ bool processInput(bool continueApplication) {
 		modelMatrixbecaria = glm::rotate(modelMatrixbecaria, glm::radians(-9.0f), glm::vec3(0, 1, 0));
 		animationIndex = 4;
 	}if (modelSelected == 2 && glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS){
-		modelMatrixbecaria = glm::translate(modelMatrixbecaria, glm::vec3(0, 0, 1.52));
+		modelMatrixbecaria = glm::translate(modelMatrixbecaria, glm::vec3(0, 0, 1.02));
 		animationIndex = 4;
 	}else if (modelSelected == 2 && glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS){
-		modelMatrixbecaria = glm::translate(modelMatrixbecaria, glm::vec3(0, 0, -1.52));
+		modelMatrixbecaria = glm::translate(modelMatrixbecaria, glm::vec3(0, 0, -1.02));
 		animationIndex = 4;
 	}
 
@@ -1552,7 +1553,7 @@ void applicationLoop() {
 			//axis[1] = +2;
 			angleTarget = glm::angle(glm::quat_cast(modelMatrixbecaria));
 			target = modelMatrixbecaria[3];
-			target[1] = +6;
+			target[1] = + 0.5f;
 		}
 
 		if(std::isnan(angleTarget))
@@ -1849,10 +1850,10 @@ void applicationLoop() {
 			addOrUpdateColliders(collidersOBB, "bTall-" + std::to_string(i), lampCollider, modelMatrixColliderLamp);
 			// Set the orientation of collider before doing the scale
 			lampCollider.u = glm::quat_cast(modelMatrixColliderLamp);
-			modelMatrixColliderLamp = glm::scale(modelMatrixColliderLamp, glm::vec3(10.0, 10.0, 10.0));
+			modelMatrixColliderLamp = glm::scale(modelMatrixColliderLamp, glm::vec3(2.0, 2.0, 2.0));
 			modelMatrixColliderLamp = glm::translate(modelMatrixColliderLamp, buildingTall.getObb().c);
 			lampCollider.c = glm::vec3(modelMatrixColliderLamp[3]);
-			lampCollider.e = buildingTall.getObb().e * glm::vec3(10.0, 10.0, 10.0);
+			lampCollider.e = buildingTall.getObb().e * glm::vec3(2.0, 2.0, 2.0);
 			std::get<0>(collidersOBB.find("bTall-" + std::to_string(i))->second) = lampCollider;
 		}
 
@@ -1880,12 +1881,12 @@ void applicationLoop() {
 				glm::radians(-90.0f), glm::vec3(1, 0, 0));
 		// Set the orientation of collider before doing the scale
 		becariaCollider.u = glm::quat_cast(modelmatrixColliderbecaria);
-		modelmatrixColliderbecaria = glm::scale(modelmatrixColliderbecaria, glm::vec3(0.3, 0.3, 0.3));
+		modelmatrixColliderbecaria = glm::scale(modelmatrixColliderbecaria, glm::vec3(0.06, 0.06, 0.06));
 		modelmatrixColliderbecaria = glm::translate(modelmatrixColliderbecaria,
 				glm::vec3(becariaModelAnimate.getObb().c.x,
 						becariaModelAnimate.getObb().c.y,
-						becariaModelAnimate.getObb().c.z + 10));
-		becariaCollider.e = becariaModelAnimate.getObb().e * glm::vec3(0.3, 0.3, 0.3) * glm::vec3(0.787401574, 0.787401574, 0.787401574);
+						becariaModelAnimate.getObb().c.z + 5));
+		becariaCollider.e = becariaModelAnimate.getObb().e * glm::vec3(0.06, 0.06, 0.06) * glm::vec3(0.787401574, 0.787401574, 0.787401574);
 		becariaCollider.c = glm::vec3(modelmatrixColliderbecaria[3]);
 		addOrUpdateColliders(collidersOBB, "becaria", becariaCollider, modelMatrixbecaria);
 
@@ -2293,7 +2294,7 @@ void renderScene(bool renderParticles){
 	for (int i = 0; i < bTallPosition.size(); i++){
 		bTallPosition[i].y = terrain.getHeightTerrain(bTallPosition[i].x, bTallPosition[i].z);
 		buildingTall.setPosition(bTallPosition[i]);
-		buildingTall.setScale(glm::vec3(10.0, 10.0, 10.0));
+		buildingTall.setScale(glm::vec3(2.0, 2.0, 2.0));
 		buildingTall.setOrientation(glm::vec3(0, bTallOrientation[i], 0));
 		buildingTall.render();
 	}
@@ -2386,7 +2387,7 @@ void renderScene(bool renderParticles){
 	}
 	//modelMatrixbecaria[3][1] = terrain.getHeightTerrain(modelMatrixbecaria[3][0], modelMatrixbecaria[3][2]);
 	glm::mat4 modelMatrixbecariaBody = glm::mat4(modelMatrixbecaria);
-	modelMatrixbecariaBody = glm::scale(modelMatrixbecariaBody, glm::vec3(0.021, 0.021, 0.021));
+	modelMatrixbecariaBody = glm::scale(modelMatrixbecariaBody, glm::vec3(0.0021, 0.0021, 0.0021));
 	becariaModelAnimate.setAnimationIndex(animationIndex);
 	becariaModelAnimate.render(modelMatrixbecariaBody);
 
