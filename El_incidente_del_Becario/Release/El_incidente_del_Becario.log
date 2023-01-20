@@ -181,103 +181,88 @@ c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos vi
   c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\external\glm\glm\fwd.hpp(418): note: see declaration of 'glm::vec<3,float,0>'
 c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\cgalib\include\headers\shadowbox.h(44): warning C4251: 'ShadowBox::maxs': struct 'glm::vec<3,float,0>' needs to have dll-interface to be used by clients of class 'ShadowBox'
   c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\external\glm\glm\fwd.hpp(418): note: see declaration of 'glm::vec<3,float,0>'
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(203): warning C4305: 'initializing': truncation from 'double' to '_Ty'
+c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(232): warning C4305: 'initializing': truncation from 'double' to '_Ty'
           with
           [
               _Ty=float
           ]
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(206): warning C4305: 'initializing': truncation from 'double' to '_Ty'
-          with
-          [
-              _Ty=float
-          ]
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(222): warning C4305: 'initializing': truncation from 'double' to 'float'
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1011): warning C4018: '<': signed/unsigned mismatch
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1257): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1258): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1259): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1260): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1264): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1330): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1330): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1332): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1332): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1377): warning C4305: '+=': truncation from 'double' to 'float'
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1380): warning C4305: '-=': truncation from 'double' to 'float'
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1383): warning C4305: '+=': truncation from 'double' to 'float'
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1386): warning C4305: '-=': truncation from 'double' to 'float'
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1389): warning C4305: '+=': truncation from 'double' to 'float'
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1392): warning C4305: '-=': truncation from 'double' to 'float'
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1395): warning C4305: '+=': truncation from 'double' to 'float'
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1398): warning C4305: '-=': truncation from 'double' to 'float'
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1401): warning C4305: '+=': truncation from 'double' to 'float'
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1404): warning C4305: '-=': truncation from 'double' to 'float'
+c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(248): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1041): warning C4018: '<': signed/unsigned mismatch
+c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1287): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1288): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1289): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1290): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1294): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1360): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1360): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1362): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1362): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1407): warning C4305: '+=': truncation from 'double' to 'float'
 c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1410): warning C4305: '-=': truncation from 'double' to 'float'
 c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1413): warning C4305: '+=': truncation from 'double' to 'float'
 c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1416): warning C4305: '-=': truncation from 'double' to 'float'
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1474): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1419): warning C4305: '+=': truncation from 'double' to 'float'
+c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1422): warning C4305: '-=': truncation from 'double' to 'float'
+c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1425): warning C4305: '+=': truncation from 'double' to 'float'
+c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1428): warning C4305: '-=': truncation from 'double' to 'float'
+c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1431): warning C4305: '+=': truncation from 'double' to 'float'
+c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1434): warning C4305: '-=': truncation from 'double' to 'float'
+c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1437): warning C4305: '+=': truncation from 'double' to 'float'
+c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1440): warning C4305: '-=': truncation from 'double' to 'float'
+c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1443): warning C4305: '+=': truncation from 'double' to 'float'
+c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1446): warning C4305: '-=': truncation from 'double' to 'float'
+c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1504): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
           with
           [
               T=float
           ]
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1546): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1576): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
           with
           [
               T=float
           ]
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1547): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1577): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
           with
           [
               T=float
           ]
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1548): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1578): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
           with
           [
               T=float
           ]
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1623): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1624): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1633): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1634): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1643): warning C4018: '<': signed/unsigned mismatch
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1655): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1656): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1662): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1653): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1654): warning C4305: 'argument': truncation from 'double' to 'float'
 c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1663): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1665): warning C4018: '<': signed/unsigned mismatch
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1677): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1678): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1684): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1685): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1809): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1813): warning C4018: '<': signed/unsigned mismatch
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1830): warning C4018: '<': signed/unsigned mismatch
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(2015): warning C4018: '>': signed/unsigned mismatch
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(2043): warning C4018: '>': signed/unsigned mismatch
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(2263): warning C4018: '<': signed/unsigned mismatch
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(2271): warning C4018: '<': signed/unsigned mismatch
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(2351): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1664): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1839): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1843): warning C4018: '<': signed/unsigned mismatch
+c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(1860): warning C4018: '<': signed/unsigned mismatch
+c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(2045): warning C4018: '>': signed/unsigned mismatch
+c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(2073): warning C4018: '>': signed/unsigned mismatch
+c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(2293): warning C4018: '<': signed/unsigned mismatch
+c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(2301): warning C4018: '<': signed/unsigned mismatch
+c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(2381): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
           with
           [
               T=float
           ]
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(2393): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(2423): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
           with
           [
               T=float
           ]
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(2432): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(2462): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
           with
           [
               T=float
           ]
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(2466): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(2467): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(2496): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\copys\onedrive\documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\cgaproyecto-final\el_incidente_del_becario\src\main.cpp(2497): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
      Creating library C:\Users\copys\OneDrive\Documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\CGAProyecto-Final\Proyectofinal\Release\El_incidente_del_Becario.lib and object C:\Users\copys\OneDrive\Documentos\a escuela\compu grafica avanzada\proyectos visual studio\proyecto\CGAProyecto-Final\Proyectofinal\Release\El_incidente_del_Becario.exp
 LINK : warning LNK4098: defaultlib 'MSVCRTD' conflicts with use of other libs; use /NODEFAULTLIB:library
   Generating code
-  119 of 1851 functions ( 6.4%) were compiled, the rest were copied from previous compilation.
+  1 of 1875 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     2 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
