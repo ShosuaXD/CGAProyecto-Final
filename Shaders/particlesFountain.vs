@@ -18,14 +18,14 @@ void main()
     vec3 pos = vec3(0.0);
     Transp = 0.0;
 
-	// Si la particula ya existe,su valor de nacimiento debe ser mayor al tiempo de animacion
+	// Si la particula ya existe
 	if(Time > StartTime){
 		float t = Time - StartTime;
 
-		// Sige viva la particula
+		//sigue viva la particula
 		if(t < ParticleLifetime){
 			pos = VertexInitVel * t + Gravity * t * t;
-			Transp = 1.0f - t / ParticleLifetime;
+			Transp = 1.0 - t / ParticleLifetime;
 		}
 	}
 

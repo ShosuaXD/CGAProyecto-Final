@@ -73,7 +73,7 @@ void FontTypeRendering::Initialize() {
 	}
 	// Se le indica a dicha cara el archivo ttf que se utilizar�.
 	if (FT_New_Face(ft_lib, "../Fonts/SIXTY.ttf", 0, &face) != 0) {
-		std::cerr << "Unable to load arial.ttf\n";
+		std::cerr << "Unable to load SIXTY.ttf\n";
 		cleanup();
 		return exit(-1);
 	}
@@ -125,12 +125,10 @@ void FontTypeRendering::render(const std::string &str, float x, float y, float s
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glUseProgram (program);
 	// Se envia el color de la fuente.
-	//glUniform4f(colorUniform, 0.5, 1.0, 1.0, 1.0);
 	glUniform4f(colorUniform, r, g, b, 1.0);
 	// Se envia la textura a utilizar.
 	glUniform1i(texUniform, 0);
 	// Se coloca el tama�o en Pixeles de la fuente.
-	// FT_Set_Pixel_Sizes(face, 0, 12);
 	FT_Set_Pixel_Sizes(face, 0, size);
 	// Renderiza la fuente.
 	render_text(str, face, x, y, SCALEX, SCALEY);

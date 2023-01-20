@@ -67,7 +67,6 @@
     <None Include="..\Shaders\iluminacion_textura_animation_shadow.vs" />
     <None Include="..\Shaders\iluminacion_texture_res.vs" />
     <None Include="..\Shaders\multipleLights.fs" />
-    <None Include="..\Shaders\multipleLights_copia.fs" />
     <None Include="..\Shaders\multipleLights_fog.fs" />
     <None Include="..\Shaders\multipleLights_shadow.fs" />
     <None Include="..\Shaders\particlesFire.fs" />
@@ -89,6 +88,7 @@
     <None Include="..\Shaders\terrain_fog.vs" />
     <None Include="..\Shaders\terrain_shadow.fs" />
     <None Include="..\Shaders\terrain_shadow.vs" />
+    <None Include="..\Shaders\texturizado.fs" />
     <None Include="..\Shaders\texturizado.vs" />
     <None Include="..\Shaders\texturizado_depth_view.fs" />
   </ItemGroup>
@@ -96,7 +96,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{172f046a-36b0-41d6-a3d8-5a9e12f214e6}</ProjectGuid>
     <RootNamespace>CGALib</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

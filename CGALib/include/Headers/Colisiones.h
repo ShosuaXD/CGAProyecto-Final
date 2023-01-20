@@ -212,24 +212,23 @@ bool testOBBOBB(AbstractModel::OBB a, AbstractModel::OBB b){
 
 bool testSLABPlane(float p, float v, float min, float max, float &tmin, float &tmax) {
 	if (fabs(v) < 0.01) {
-		if (p >= min && p <= max)
+		if (p >= min && p <= max) {
 			return true;
-		return false;
+		} return false;
 	}
-	float ood = 1 / v;
-	float t1 = (min - p) * ood;
-	float t2 = (max - p) * ood;
+	float aod = 1 / v;
+	float t1 = (min - p)*aod;
+	float t2 = (max - p)*aod;
 	if (t1 > t2) {
 		float tmp = t1;
 		t1 = t2;
 		t2 = tmp;
-		// std::swap(t1, t2);
+		//std::swap(t1,t2);
 	}
 	if (t1 > tmin)
 		tmin = t1;
 	if (t2 < tmax)
 		tmax = t2;
-
 	if (tmin > tmax)
 		return false;
 	return true;
@@ -245,22 +244,21 @@ bool intersectSegmentAABB(glm::vec3 origen, glm::vec3 target, AbstractModel::AAB
 		return false;
 	if (!testSLABPlane(origen.z, d.z, aabb.mins.z, aabb.maxs.z, tmin, tmax))
 		return false;
-	// Si se llega a este punto, hay colision del rayo con la caja
+	//Si se llega a este punto, hay colision del rayo y la caja
 
 	if (tmin >= 0 && tmin <= glm::distance(origen, target)) {
 		return true;
 	}
-	// Esto es para detectar collision con mayow
-	/*if (tmax >= 0 && tmax <= glm::distance(origen, target)) 
+	//esto es para detectar colision con May
+	/*if (tmax >= 0 && tmax <= glm::distance(origen, target)) {
 		return true;
-	}*/
-	return false;
+	}
+	return false;*/
 
 	/*glm::vec3 pint = origen + tmin * d;
-	if (pint.x >= aabb.mins.x && pint.x <= aabb.maxs.x &&
-		pint.y >= aabb.mins.y && pint.y <= aabb.maxs.y &&
-		pint.z >= aabb.mins.z && pint.z <= aabb.maxs.z) {
-	}*/
+	if(pint.x>=aabb.mins.x && pint.x<=aabb.maxs.x &&
+		pint.x >= aabb.mins.x && pint.x <= aabb.maxs.x &&
+		pint.x >= aabb.mins.x && pint.x <= aabb.maxs.x)*/
 }
 
 bool rayOBBIntersect(glm::vec3 origen, glm::vec3 target, AbstractModel::OBB obb) {
