@@ -327,6 +327,12 @@ std::vector<glm::vec3> positionWallNorthSouths = { glm::vec3(0.1953125f, 0.0f, -
 // Variable para obtener medidas de escala y rotacion.
 float varUpdate = 2.0f;
 // bool buttomIsPress = false;
+// Variables para el control de la neblina
+float densityValue = 0.008;
+float gradientValue = 1.5;
+float lowerLimitValue = 0.0;
+float upperLimitValue = 0.2;
+float fogValue = 0.5;
 
 std::vector<glm::vec3> lamp2Position = { glm::vec3(-36.52, 0, -23.24),
 		glm::vec3(-52.73, 0, -3.90) };
@@ -1598,20 +1604,51 @@ bool processInput(bool continueApplication) {
 		animationIndex = 4;
 	}
 
-	if (glfwGetKey(window, GLFW_KEY_O) == GLFW_PRESS) {
+	/*if (glfwGetKey(window, GLFW_KEY_O) == GLFW_PRESS) {
 		// buttomIsPress = true;
 		varUpdate += 0.1f;
 	}
 	else if (glfwGetKey(window, GLFW_KEY_L) == GLFW_PRESS) {
 		// buttomIsPress = true;
 		varUpdate -= 0.1f;
-	}
+	}*/
 	/*else
 		buttomIsPress = false;*/
-	if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS)
-		std::cout << "scaleFactory = " << varUpdate << std::endl;
+	if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS) {
+		// std::cout << "scaleFactory = " << varUpdate << std::endl;
+		// std::cout << "Density de niebla= " << densityValue << std::endl;
+		// std::cout << "Gradiente de niebla= " << gradientValue << std::endl;
+		std::cout << "valor minimo de la niebla = " << lowerLimitValue << std::endl;
+		std::cout << "valor maximo de la niebla = " << upperLimitValue << std::endl;
+		std::cout << "nivel de color R y B = " << fogValue << std::endl;
+	}
 	/*if (varUpdate >= 360.0f)
 		varUpdate = 0.0f;*/
+	
+	// Botones para controlar los parametros de la neblina
+	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS && glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_RELEASE)
+		densityValue += 0.001f;
+	else if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS && glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
+		densityValue -= 0.001f;
+
+	if (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS && glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_RELEASE)
+		gradientValue += 0.1f;
+	else if (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS && glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
+		gradientValue -= 0.1f;
+
+	if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS && glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_RELEASE)
+		fogValue += 0.01f;
+	else if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS && glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
+		fogValue -= 0.01f;
+
+	if (glfwGetKey(window, GLFW_KEY_L) == GLFW_PRESS && glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_RELEASE) {
+		lowerLimitValue += 0.1f;
+		upperLimitValue += 0.1f;
+	}
+	else if (glfwGetKey(window, GLFW_KEY_L) == GLFW_PRESS && glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
+		lowerLimitValue -= 0.1f;
+		upperLimitValue -= 0.1f;
+	}
 
 	bool keySpaceStatus = glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS;
 	if(!isJump && keySpaceStatus){
@@ -1759,12 +1796,20 @@ void applicationLoop() {
 		shaderParticlesFire.setMatrix4("projection", 1, false, glm::value_ptr(projection));
 		shaderParticlesFire.setMatrix4("view", 1, false, glm::value_ptr(view));
 
-		/*******************************************
-		 * Propiedades de neblina
-		 *******************************************/
-		shaderMulLighting.setVectorFloat3("fogColor", glm::value_ptr(glm::vec3(0.5, 0.5, 0.4)));
-		shaderTerrain.setVectorFloat3("fogColor", glm::value_ptr(glm::vec3(0.5, 0.5, 0.4)));
-		shaderSkybox.setVectorFloat3("fogColor", glm::value_ptr(glm::vec3(0.5, 0.5, 0.4)));
+		/*************************************************************
+		*	Propiedades de la neblina
+		**************************************************************/
+		shaderMulLighting.setFloat("density", 0.06);
+		shaderMulLighting.setFloat("gradient", 0.6);
+		shaderMulLighting.setVectorFloat3("fogColor", glm::value_ptr(glm::vec3(0.34f, 1.0f, 0.34f)));
+
+		shaderTerrain.setFloat("density", 0.06);
+		shaderTerrain.setFloat("gradient", 0.6);
+		shaderTerrain.setVectorFloat3("fogColor", glm::value_ptr(glm::vec3(0.34f, 1.0f, 0.34f)));
+
+		shaderSkybox.setVectorFloat3("fogColor", glm::value_ptr(glm::vec3(0.34f, 1.0f, 0.34f)));
+		shaderSkybox.setFloat("lowerLimit", 0.2);
+		shaderSkybox.setFloat("upperLimit", 0.4);
 
 		/*******************************************
 		 * Propiedades Luz direccional
