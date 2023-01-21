@@ -1535,11 +1535,12 @@ bool processInput(bool continueApplication) {
 	if(availableSave && glfwGetKey(window, GLFW_KEY_ENTER) == GLFW_PRESS){
 		saveFrame = true;
 		availableSave = false;
-	}if(glfwGetKey(window, GLFW_KEY_ENTER) == GLFW_RELEASE)
+	}
+	if(glfwGetKey(window, GLFW_KEY_ENTER) == GLFW_RELEASE)
 		availableSave = true;
 
 	// Dart Lego model movements
-	if (modelSelected == 1 && glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_RELEASE &&
+	/*if (modelSelected == 1 && glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_RELEASE &&
 			glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
 		rotDartHead += 0.02;
 	else if (modelSelected == 1 && glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS &&
@@ -1589,6 +1590,57 @@ bool processInput(bool continueApplication) {
 		modelMatrixDart = glm::translate(modelMatrixDart, glm::vec3(-0.02, 0.0, 0.0));
 	else if (modelSelected == 2 && glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
 		modelMatrixDart = glm::translate(modelMatrixDart, glm::vec3(0.02, 0.0, 0.0));
+	*/
+
+	if (glfwJoystickPresent(GLFW_JOYSTICK_1) == GLFW_TRUE) {
+		// std::cout << "Esta conectado el joystick 0" << std::endl;
+		int numeroAxes, numeroBotones;
+		const float  * axes = glfwGetJoystickAxes(GLFW_JOYSTICK_1, &numeroAxes);
+		/*std::cout << "Numero de ejes: " << numeroAxes << std::endl;
+		std::cout << "Axes[0]: " << axes[0] << std::endl;
+		std::cout << "Axes[1]: " << axes[1] << std::endl;
+		std::cout << "Axes[2]: " << axes[2] << std::endl;
+		std::cout << "Axes[3]: " << axes[3] << std::endl;
+		std::cout << "Axes[4]: " << axes[4] << std::endl;
+		std::cout << "Axes[5]: " << axes[5] << std::endl;*/
+		// std::cout << "Axes[6]: " << axes[6] << std::endl;
+
+		/******************************************
+		* Funciones programadas segun el mapeo de un control de xbox one
+		*********************************************/
+		// Condicion para girar el personaje segun la direccion del joystick. Joystick Izquierdo, eje X.
+		// Nota: cambiar segun el mapeo de direcciones del joystick.
+		if (axes[0] > 0.2f || axes[0] < -0.2f) {
+			modelMatrixbecaria = glm::rotate(modelMatrixbecaria, axes[0] * -0.02f, glm::vec3(0, 1, 0));
+			animationIndex = 4;
+		}
+		// Condicion para mover el personaje segun la direccion del joystick. Joystick Izquierdo, eje Y.
+		// Nota: cambiar segun el mapeo de direcciones del joystick
+		if (axes[1] > 0.2f || axes[1] < -0.2f) {
+			modelMatrixbecaria = glm::translate(modelMatrixbecaria, glm::vec3(0, 0, axes[1] * 0.02f));
+			animationIndex = 4;
+		}
+		// Condicion para girar la camara (moviento yaw) el personaje segun la direccion del joystick, Joystick Derecho, eje X.
+		// Nota: cambiar segun el mapeo de direcciones del joystick
+		if (axes[2] > 0.2f || axes[2] < -0.2f) {
+			camera->mouseMoveCamera(-axes[2] * 0.5, 0, deltaTime);
+		}
+		// Condicion para girar la camara (moviento pitch) el personaje segun la direccion del joystick, Joystick Derecho, eje Y.
+		// Nota: cambiar segun el mapeo de direcciones del joystick
+		if (axes[3] > 0.2f || axes[3] < -0.2f) {
+			camera->mouseMoveCamera(0, axes[3] * 0.5, deltaTime);
+		}
+		// Condicion para alguna accion o movimiento, segun el joystick gatillo Izquierdo (control xbox one LT)
+		// Nota: cambiar segun el mapeo de direcciones del joystick
+		if (fabs(axes[4]) > 0.2f) {
+			animationIndex = 0; // Animacion de apuntado
+		}
+		// Condicion para alguna accion o movimiento, segun el joystick gatillo Derecho (control xbox one RT)
+		// Nota: cambiar segun el mapeo de direcciones del joystick
+		if (fabs(axes[5]) > 0.2f) {
+			animationIndex = 1; // Animacion de disparo
+		}
+	}
 
 	if (modelSelected == 2 && glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS){
 		modelMatrixbecaria = glm::rotate(modelMatrixbecaria, glm::radians(9.0f), glm::vec3(0, 1, 0));
@@ -2810,13 +2862,13 @@ void renderScene(bool renderParticles){
 		tree.setOrientation(glm::vec3(-90.0f, 0.0f, 0.0f));
 		tree.render();
 	}
-	for(std::map<float, std::pair<std::string, glm::vec3> >::reverse_iterator it = blendingSorted.rbegin(); it != blendingSorted.rend(); it++){
-		if(it->second.first.compare("aircraft") == 0){
+	//for(std::map<float, std::pair<std::string, glm::vec3> >::reverse_iterator it = blendingSorted.rbegin(); it != blendingSorted.rend(); it++){
+		/*if(it->second.first.compare("aircraft") == 0){
 			// Render for the aircraft model
-			/*glm::mat4 modelMatrixAircraftBlend = glm::mat4(modelMatrixAircraft);
+			glm::mat4 modelMatrixAircraftBlend = glm::mat4(modelMatrixAircraft);
 			modelMatrixAircraftBlend[3][1] = terrain.getHeightTerrain(modelMatrixAircraftBlend[3][0], modelMatrixAircraftBlend[3][2]) + 2.0;
-			modelAircraft.render(modelMatrixAircraftBlend);*/
-		}
+			modelAircraft.render(modelMatrixAircraftBlend);
+		}*/
 		//else if(it->second.first.compare("lambo") == 0){
 		//	// Lambo car
 		//	glm::mat4 modelMatrixLamboBlend = glm::mat4(modelMatrixLambo);
@@ -2936,7 +2988,7 @@ void renderScene(bool renderParticles){
 		//	 */
 		//}
 
-	}
+	//}
 	glEnable(GL_CULL_FACE);
 }
 
