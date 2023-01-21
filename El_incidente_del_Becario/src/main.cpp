@@ -83,7 +83,7 @@ Shader shaderTextura;
 ShadowBox * shadowBox;
 
 std::shared_ptr<Camera> camera(new ThirdPersonCamera());
-float distanceFromTarget = 7.0;
+float distanceFromTarget = 1.0;
 
 Sphere skyboxSphere(20, 20);
 Box boxCollider;
@@ -137,7 +137,7 @@ Model becariaModelAnimate;
 // Terrain model instance
 Terrain terrain(-1, -1, 200, 8, "../Textures/heightMapBecario2.png");
 
-GLuint textureCespedID, textureTitlePlayID, textureTitleCreditsID, textureTitleExitID, textureCreditsID;
+GLuint textureCespedID, textureTitlePlayID, textureTitleCreditsID, textureTitleExitID, textureCreditsID, textureWinID;
 GLuint textureTerrainBackgroundID, textureTerrainRID, textureTerrainGID, textureTerrainBID, textureTerrainBlendMapID;
 GLuint textureParticleFountainID, textureParticleFireID, texId;
 GLuint skyboxTextureID;
@@ -225,6 +225,10 @@ float rotHelHelY = 0.0;
 // Var animate lambo dor
 int stateDoor = 0;
 float dorRotCount = 0.0;
+
+bool hasWon = false, isTouchingFan = false;
+bool fan1Done = false, fan2Done = false, fan3Done = false, fan4Done = false, fan5Done = false;
+int fansLeft = 5;
 
 // buildingTall
 /*std::vector<glm::vec3> bTallPosition = { glm::vec3(-40, 0, 35.54), glm::vec3(
@@ -327,12 +331,6 @@ std::vector<glm::vec3> positionWallNorthSouths = { glm::vec3(0.1953125f, 0.0f, -
 // Variable para obtener medidas de escala y rotacion.
 float varUpdate = 2.0f;
 // bool buttomIsPress = false;
-// Variables para el control de la neblina
-float densityValue = 0.008;
-float gradientValue = 1.5;
-float lowerLimitValue = 0.0;
-float upperLimitValue = 0.2;
-float fogValue = 0.5;
 
 std::vector<glm::vec3> lamp2Position = { glm::vec3(-36.52, 0, -23.24),
 		glm::vec3(-52.73, 0, -3.90) };
@@ -731,7 +729,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	modelLampPost2.setShader(&shaderMulLighting);
 
 	//Grass
-	modelGrass.loadModel("../models/grass/grassModel.obj");
+	modelGrass.loadModel("../models/projectModels/GrassSpots.fbx");
 	modelGrass.setShader(&shaderMulLighting);
 
 	//Fountain
@@ -751,7 +749,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	buildingWide.setShader(&shaderMulLighting);
 	Factory.loadModel("../models/projectModels/FactoryOneTex.fbx");
 	Factory.setShader(&shaderMulLighting);
-	fanAnimated.loadModel("../models/projectModels/fanAnimated.fbx");
+	fanAnimated.loadModel("../models/projectModels/fanAnimated3.fbx");
 	fanAnimated.setShader(&shaderMulLighting);
 	goop.loadModel("../models/projectModels/GoopPuddle.fbx");
 	goop.setShader(&shaderMulLighting);
@@ -956,7 +954,40 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	textureCredits.freeImage(bitmap);
 
 	// Definiendo la textura a utilizar
-	Texture textureTerrainBackground("../Textures/backgroundGrava.jpg");
+	Texture textureWin("../Textures/Win.png");
+	// Carga el mapa de bits (FIBITMAP es el tipo de dato de la libreria)
+	bitmap = textureWin.loadImage();
+	// Convertimos el mapa de bits en un arreglo unidimensional de tipo unsigned char
+	data = textureWin.convertToData(bitmap, imageWidth,
+		imageHeight);
+	// Creando la textura con id 1
+	glGenTextures(1, &textureWinID);
+	// Enlazar esa textura a una tipo de textura de 2D.
+	glBindTexture(GL_TEXTURE_2D, textureWinID);
+	// set the texture wrapping parameters
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT); // set texture wrapping to GL_REPEAT (default wrapping method)
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	// set texture filtering parameters
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	// Verifica si se pudo abrir la textura
+	if (data) {
+		// Transferis los datos de la imagen a memoria
+		// Tipo de textura, Mipmaps, Formato interno de openGL, ancho, alto, Mipmaps,
+		// Formato interno de la libreria de la imagen, el tipo de dato y al apuntador
+		// a los datos
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imageWidth, imageHeight, 0,
+			GL_BGRA, GL_UNSIGNED_BYTE, data);
+		// Generan los niveles del mipmap (OpenGL es el ecargado de realizarlos)
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+	else
+		std::cout << "Failed to load texture" << std::endl;
+	// Libera la memoria de la textura
+	textureWin.freeImage(bitmap);
+
+	// Definiendo la textura a utilizar
+	Texture textureTerrainBackground("../Textures/grassy2.png");
 	// Carga el mapa de bits (FIBITMAP es el tipo de dato de la libreria)
 	bitmap = textureTerrainBackground.loadImage();
 	// Convertimos el mapa de bits en un arreglo unidimensional de tipo unsigned char
@@ -988,7 +1019,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	textureTerrainBackground.freeImage(bitmap);
 
 	// Definiendo la textura a utilizar
-	Texture textureTerrainR("../Textures/metal.jpg");
+	Texture textureTerrainR("../Textures/mud.png");
 	// Carga el mapa de bits (FIBITMAP es el tipo de dato de la libreria)
 	bitmap = textureTerrainR.loadImage();
 	// Convertimos el mapa de bits en un arreglo unidimensional de tipo unsigned char
@@ -1020,7 +1051,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	textureTerrainR.freeImage(bitmap);
 
 	// Definiendo la textura a utilizar
-	Texture textureTerrainG("../Textures/verdeAcido.jpg");
+	Texture textureTerrainG("../Textures/grassFlowers.png");
 	// Carga el mapa de bits (FIBITMAP es el tipo de dato de la libreria)
 	bitmap = textureTerrainG.loadImage();
 	// Convertimos el mapa de bits en un arreglo unidimensional de tipo unsigned char
@@ -1052,7 +1083,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	textureTerrainG.freeImage(bitmap);
 
 	// Definiendo la textura a utilizar
-	Texture textureTerrainB("../Textures/caminoAsfalto.jpg");
+	Texture textureTerrainB("../Textures/path.png");
 	// Carga el mapa de bits (FIBITMAP es el tipo de dato de la libreria)
 	bitmap = textureTerrainB.loadImage();
 	// Convertimos el mapa de bits en un arreglo unidimensional de tipo unsigned char
@@ -1084,7 +1115,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	textureTerrainB.freeImage(bitmap);
 
 	// Definiendo la textura a utilizar
-	Texture textureTerrainBlendMap("../Textures/BlendMapBecarioV1.png");
+	Texture textureTerrainBlendMap("../Textures/blendMap.png");
 	// Carga el mapa de bits (FIBITMAP es el tipo de dato de la libreria)
 	bitmap = textureTerrainBlendMap.loadImage(true);
 	// Convertimos el mapa de bits en un arreglo unidimensional de tipo unsigned char
@@ -1453,8 +1484,10 @@ bool processInput(bool continueApplication) {
 	if (exitApp || glfwWindowShouldClose(window) != 0) {
 		return false;
 	}
-
-	if (!iniciaPartida) {
+	if (!iniciaPartida && hasWon) {
+		texturaActivaID = textureWinID;
+	}
+	else if (!iniciaPartida) {
 		bool statusEnter = glfwGetKey(window, GLFW_KEY_ENTER) == GLFW_PRESS;
 		if (titleOpt == 0 && statusEnter) {
 			iniciaPartida = true;
@@ -1535,12 +1568,11 @@ bool processInput(bool continueApplication) {
 	if(availableSave && glfwGetKey(window, GLFW_KEY_ENTER) == GLFW_PRESS){
 		saveFrame = true;
 		availableSave = false;
-	}
-	if(glfwGetKey(window, GLFW_KEY_ENTER) == GLFW_RELEASE)
+	}if(glfwGetKey(window, GLFW_KEY_ENTER) == GLFW_RELEASE)
 		availableSave = true;
 
 	// Dart Lego model movements
-	/*if (modelSelected == 1 && glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_RELEASE &&
+	if (modelSelected == 1 && glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_RELEASE &&
 			glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
 		rotDartHead += 0.02;
 	else if (modelSelected == 1 && glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS &&
@@ -1590,65 +1622,6 @@ bool processInput(bool continueApplication) {
 		modelMatrixDart = glm::translate(modelMatrixDart, glm::vec3(-0.02, 0.0, 0.0));
 	else if (modelSelected == 2 && glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
 		modelMatrixDart = glm::translate(modelMatrixDart, glm::vec3(0.02, 0.0, 0.0));
-	*/
-
-	if (glfwJoystickPresent(GLFW_JOYSTICK_1) == GLFW_TRUE) {
-		// std::cout << "Esta conectado el joystick 0" << std::endl;
-		int numeroAxes, numeroBotones;
-		const float  * axes = glfwGetJoystickAxes(GLFW_JOYSTICK_1, &numeroAxes);
-		/*std::cout << "Numero de ejes: " << numeroAxes << std::endl;
-		std::cout << "Axes[0]: " << axes[0] << std::endl;
-		std::cout << "Axes[1]: " << axes[1] << std::endl;
-		std::cout << "Axes[2]: " << axes[2] << std::endl;
-		std::cout << "Axes[3]: " << axes[3] << std::endl;
-		std::cout << "Axes[4]: " << axes[4] << std::endl;
-		std::cout << "Axes[5]: " << axes[5] << std::endl;*/
-		// std::cout << "Axes[6]: " << axes[6] << std::endl;
-
-		/******************************************
-		* Funciones programadas segun el mapeo de un control de xbox one
-		*********************************************/
-		// Condicion para girar el personaje segun la direccion del joystick. Joystick Izquierdo, eje X.
-		// Nota: cambiar segun el mapeo de direcciones del joystick.
-		if (axes[0] > 0.2f || axes[0] < -0.2f) {
-			modelMatrixbecaria = glm::rotate(modelMatrixbecaria, axes[0] * -0.02f, glm::vec3(0, 1, 0));
-			animationIndex = 4;
-		}
-		// Condicion para mover el personaje segun la direccion del joystick. Joystick Izquierdo, eje Y.
-		// Nota: cambiar segun el mapeo de direcciones del joystick
-		if (axes[1] > 0.2f || axes[1] < -0.2f) {
-			modelMatrixbecaria = glm::translate(modelMatrixbecaria, glm::vec3(0, 0, axes[1] * 0.02f));
-			animationIndex = 4;
-		}
-		// Condicion para girar la camara (moviento yaw) el personaje segun la direccion del joystick, Joystick Derecho, eje X.
-		// Nota: cambiar segun el mapeo de direcciones del joystick
-		if (axes[2] > 0.2f || axes[2] < -0.2f) {
-			camera->mouseMoveCamera(-axes[2] * 0.5, 0, deltaTime);
-		}
-		// Condicion para girar la camara (moviento pitch) el personaje segun la direccion del joystick, Joystick Derecho, eje Y.
-		// Nota: cambiar segun el mapeo de direcciones del joystick
-		if (axes[3] > 0.2f || axes[3] < -0.2f) {
-			camera->mouseMoveCamera(0, axes[3] * 0.5, deltaTime);
-		}
-		// Condicion para alguna accion o movimiento, segun el joystick gatillo Izquierdo (control xbox one LT)
-		// Nota: cambiar segun el mapeo de direcciones del joystick
-		if (fabs(axes[4]) > 0.2f) {
-			animationIndex = 0; // Animacion de apuntado
-		}
-		// Condicion para alguna accion o movimiento, segun el joystick gatillo Derecho (control xbox one RT)
-		// Nota: cambiar segun el mapeo de direcciones del joystick
-		if (fabs(axes[5]) > 0.2f) {
-			animationIndex = 1; // Animacion de disparo
-		}
-
-		const unsigned char * botones = glfwGetJoystickButtons(GLFW_JOYSTICK_1, &numeroBotones);
-		std::cout << "Numero de botones: " << numeroBotones << std::endl;
-
-		if (botones[0] == GLFW_PRESS) {	// Boton A del control de Xbox one
-			// El boton puede cambiar segun el mapeo del control agregado
-			animationIndex = 3;
-		}
-	}
 
 	if (modelSelected == 2 && glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS){
 		modelMatrixbecaria = glm::rotate(modelMatrixbecaria, glm::radians(9.0f), glm::vec3(0, 1, 0));
@@ -1664,51 +1637,20 @@ bool processInput(bool continueApplication) {
 		animationIndex = 4;
 	}
 
-	/*if (glfwGetKey(window, GLFW_KEY_O) == GLFW_PRESS) {
+	if (glfwGetKey(window, GLFW_KEY_O) == GLFW_PRESS) {
 		// buttomIsPress = true;
 		varUpdate += 0.1f;
 	}
 	else if (glfwGetKey(window, GLFW_KEY_L) == GLFW_PRESS) {
 		// buttomIsPress = true;
 		varUpdate -= 0.1f;
-	}*/
+	}
 	/*else
 		buttomIsPress = false;*/
-	if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS) {
-		// std::cout << "scaleFactory = " << varUpdate << std::endl;
-		// std::cout << "Density de niebla= " << densityValue << std::endl;
-		// std::cout << "Gradiente de niebla= " << gradientValue << std::endl;
-		std::cout << "valor minimo de la niebla = " << lowerLimitValue << std::endl;
-		std::cout << "valor maximo de la niebla = " << upperLimitValue << std::endl;
-		std::cout << "nivel de color R y B = " << fogValue << std::endl;
-	}
+	if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS)
+		std::cout << "scaleFactory = " << varUpdate << std::endl;
 	/*if (varUpdate >= 360.0f)
 		varUpdate = 0.0f;*/
-	
-	// Botones para controlar los parametros de la neblina
-	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS && glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_RELEASE)
-		densityValue += 0.001f;
-	else if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS && glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
-		densityValue -= 0.001f;
-
-	if (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS && glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_RELEASE)
-		gradientValue += 0.1f;
-	else if (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS && glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
-		gradientValue -= 0.1f;
-
-	if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS && glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_RELEASE)
-		fogValue += 0.01f;
-	else if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS && glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
-		fogValue -= 0.01f;
-
-	if (glfwGetKey(window, GLFW_KEY_L) == GLFW_PRESS && glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_RELEASE) {
-		lowerLimitValue += 0.1f;
-		upperLimitValue += 0.1f;
-	}
-	else if (glfwGetKey(window, GLFW_KEY_L) == GLFW_PRESS && glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
-		lowerLimitValue -= 0.1f;
-		upperLimitValue -= 0.1f;
-	}
 
 	bool keySpaceStatus = glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS;
 	if(!isJump && keySpaceStatus){
@@ -1856,20 +1798,12 @@ void applicationLoop() {
 		shaderParticlesFire.setMatrix4("projection", 1, false, glm::value_ptr(projection));
 		shaderParticlesFire.setMatrix4("view", 1, false, glm::value_ptr(view));
 
-		/*************************************************************
-		*	Propiedades de la neblina
-		**************************************************************/
-		shaderMulLighting.setFloat("density", 0.06);
-		shaderMulLighting.setFloat("gradient", 0.6);
-		shaderMulLighting.setVectorFloat3("fogColor", glm::value_ptr(glm::vec3(0.34f, 1.0f, 0.34f)));
-
-		shaderTerrain.setFloat("density", 0.06);
-		shaderTerrain.setFloat("gradient", 0.6);
-		shaderTerrain.setVectorFloat3("fogColor", glm::value_ptr(glm::vec3(0.34f, 1.0f, 0.34f)));
-
-		shaderSkybox.setVectorFloat3("fogColor", glm::value_ptr(glm::vec3(0.34f, 1.0f, 0.34f)));
-		shaderSkybox.setFloat("lowerLimit", 0.2);
-		shaderSkybox.setFloat("upperLimit", 0.4);
+		/*******************************************
+		 * Propiedades de neblina
+		 *******************************************/
+		shaderMulLighting.setVectorFloat3("fogColor", glm::value_ptr(glm::vec3(0.5, 0.5, 0.4)));
+		shaderTerrain.setVectorFloat3("fogColor", glm::value_ptr(glm::vec3(0.5, 0.5, 0.4)));
+		shaderSkybox.setVectorFloat3("fogColor", glm::value_ptr(glm::vec3(0.5, 0.5, 0.4)));
 
 		/*******************************************
 		 * Propiedades Luz direccional
@@ -2236,7 +2170,22 @@ void applicationLoop() {
 		for (int i = 0; i < positionFanAnimateds.size(); i++) {
 			AbstractModel::OBB bSmallCollider;
 			glm::mat4 modelMatrixColliderbWide = glm::mat4(1.0);
-			modelMatrixColliderbWide = glm::translate(modelMatrixColliderbWide, positionFanAnimateds[i]);
+			if (i == 0)
+				//fanAnimated.setPosition(glm::vec3(56.4453125f, 0.0f, 38.8671875f));
+				modelMatrixColliderbWide = glm::translate(modelMatrixColliderbWide, glm::vec3(56.4453125f, 0.0f, 38.8671875f));
+			else if (i == 1)
+				//fanAnimated.setPosition(glm::vec3(-54.4921875f, 0.0f, -13.8671875f));
+				modelMatrixColliderbWide = glm::translate(modelMatrixColliderbWide, glm::vec3(-54.4921875f, 0.0f, -13.8671875f));
+			else if (i == 2)
+				//fanAnimated.setPosition(glm::vec3(38.8671875f, 0.0f, -58.7890625f));
+				modelMatrixColliderbWide = glm::translate(modelMatrixColliderbWide, glm::vec3(38.8671875f, 0.0f, -58.7890625f));
+			else if (i == 3)
+				//fanAnimated.setPosition(glm::vec3(25.0f, 0.0f, -2.734375f));
+				modelMatrixColliderbWide = glm::translate(modelMatrixColliderbWide, glm::vec3(25.0f, 0.0f, -2.734375f));
+			else if (i == 4)
+				//fanAnimated.setPosition(glm::vec3(36.9140625f, 0.0f, 35.15625f));
+				modelMatrixColliderbWide = glm::translate(modelMatrixColliderbWide, glm::vec3(36.9140625f, 0.0f, 35.15625f));
+			//modelMatrixColliderbWide = glm::translate(modelMatrixColliderbWide, positionFanAnimateds[i]);
 			//modelMatrixColliderbWide = glm::rotate(modelMatrixColliderbWide, glm::radians(-90.0f),
 			//	glm::vec3(1, 0, 0));
 			modelMatrixColliderbWide = glm::rotate(modelMatrixColliderbWide, glm::radians(orientationFanAnimateds[i]),
@@ -2244,10 +2193,11 @@ void applicationLoop() {
 			addOrUpdateColliders(collidersOBB, "fan-" + std::to_string(i), bSmallCollider, modelMatrixColliderbWide);
 			// Set the orientation of collider before doing the scale
 			bSmallCollider.u = glm::quat_cast(modelMatrixColliderbWide);
-			modelMatrixColliderbWide = glm::scale(modelMatrixColliderbWide, glm::vec3(0.5f, 0.5f, 0.5f));
+			modelMatrixColliderbWide = glm::scale(modelMatrixColliderbWide, glm::vec3(0.1f, 0.2f, 0.02f));
 			modelMatrixColliderbWide = glm::translate(modelMatrixColliderbWide, fanAnimated.getObb().c);
 			bSmallCollider.c = glm::vec3(modelMatrixColliderbWide[3]);
-			bSmallCollider.e = fanAnimated.getObb().e * glm::vec3(0.5f, 0.5f, 0.5f);
+			bSmallCollider.c.z -= 1;
+			bSmallCollider.e = fanAnimated.getObb().e * glm::vec3(0.1f, 0.2f, 0.02f);
 			std::get<0>(collidersOBB.find("fan-" + std::to_string(i))->second) = bSmallCollider;
 		}
 
@@ -2311,6 +2261,47 @@ void applicationLoop() {
 					std::cout << "Colision " << it->first << " with "
 							<< jt->first << std::endl;
 					isCollision = true;
+					if ( ((it->first == "becaria" && jt->first == "fan-0") ||
+						(it->first == "fan-0" && jt->first == "becaria")) && !fan1Done) {
+						fansLeft -= 1;
+						fan1Done = true;
+						if (fansLeft <= 0) {
+							hasWon = true;
+							iniciaPartida = false;
+						} std::cout << "becaria con fan-0" << std::endl;
+					} else if ( ((it->first == "becaria" && jt->first == "fan-1") ||
+						(it->first == "fan-1" && jt->first == "becaria")) && !fan2Done) {
+						fansLeft -= 1;
+						fan2Done = true;
+						if (fansLeft <= 0) {
+							hasWon = true;
+							iniciaPartida = false;
+						} std::cout << "becaria con fan-1" << std::endl;
+					} else if ( ((it->first == "becaria" && jt->first == "fan-2") ||
+						(it->first == "fan-2" && jt->first == "becaria")) && !fan3Done) {
+						fansLeft -= 1;
+						fan3Done = true;
+						if (fansLeft <= 0) {
+							hasWon = true;
+							iniciaPartida = false;
+						} std::cout << "becaria con fan-2" << std::endl;
+					} else if ( ((it->first == "becaria" && jt->first == "fan-3") ||
+						(it->first == "fan-3" && jt->first == "becaria")) && !fan4Done) {
+						fansLeft -= 1;
+						fan4Done = true;
+						if (fansLeft <= 0) {
+							hasWon = true;
+							iniciaPartida = false;
+						} std::cout << "becaria con fan-3" << std::endl;
+					}else if ( ((it->first == "becaria" && jt->first == "fan-4") ||
+						(it->first == "fan-4" && jt->first == "becaria")) && !fan5Done) {
+						fansLeft -= 1;
+						fan5Done = true;
+						if (fansLeft <= 0) {
+							hasWon = true;
+							iniciaPartida = false;
+						} std::cout << "becaria con fan-4" << std::endl;
+					}
 				}
 			}
 			addOrUpdateCollisionDetection(collisionDetection, it->first, isCollision);
@@ -2712,10 +2703,26 @@ void renderScene(bool renderParticles){
 	for (int i = 0; i < positionFanAnimateds.size(); i++) {
 		positionFanAnimateds[i].y = terrain.getHeightTerrain(positionFanAnimateds[i].x, positionFanAnimateds[i].z);
 		positionFanAnimateds[i].y += 50;
-		fanAnimated.setPosition(positionFanAnimateds[i]);
-		fanAnimated.setScale(glm::vec3(2.0f, 2.0f, 2.0f));
+		//{ glm::vec3(-56.4453125f, 0.0f, 38.8671875f),		// Fan animado 1
+		//	glm::vec3(-54.4921875f, 0.0f, -13.8671875f),	// Fan animado 2
+		//	glm::vec3(38.8671875f, 0.0f, -58.7890625f),		// Fan animado 3
+		//	glm::vec3(25.0f, 0.0f, -2.734375f),				// Fan animado 4
+		//	glm::vec3(36.9140625f, 0.0f, 35.15625f) };
+		//fanAnimated.setPosition(positionFanAnimateds[i]);
+		if(i==0)
+			fanAnimated.setPosition(glm::vec3(56.4453125f, 0.0f, 38.8671875f));
+		else if (i == 1)
+			fanAnimated.setPosition(glm::vec3(-54.4921875f, 0.0f, -13.8671875f));
+		else if (i == 2)
+			fanAnimated.setPosition(glm::vec3(38.8671875f, 0.0f, -58.7890625f));
+		else if (i == 3)
+			fanAnimated.setPosition(glm::vec3(25.0f, 0.0f, -2.734375f));
+		else if (i == 4)
+			fanAnimated.setPosition(glm::vec3(36.9140625f, 0.0f, 35.15625f));
+		fanAnimated.setScale(glm::vec3(0.1f, 0.1f, 0.1f));
 		fanAnimated.setOrientation(glm::vec3(-90.0f, orientationFanAnimateds[i], 0.0f));
-		fanAnimated.setAnimationIndex(0);
+		//fanAnimated.setOrientation(glm::vec3(-90.0f, 0.0f, 0.0f));
+		//fanAnimated.setAnimationIndex(1);
 		fanAnimated.render();
 	}
 	// Charcos
@@ -2870,13 +2877,13 @@ void renderScene(bool renderParticles){
 		tree.setOrientation(glm::vec3(-90.0f, 0.0f, 0.0f));
 		tree.render();
 	}
-	//for(std::map<float, std::pair<std::string, glm::vec3> >::reverse_iterator it = blendingSorted.rbegin(); it != blendingSorted.rend(); it++){
-		/*if(it->second.first.compare("aircraft") == 0){
+	for(std::map<float, std::pair<std::string, glm::vec3> >::reverse_iterator it = blendingSorted.rbegin(); it != blendingSorted.rend(); it++){
+		if(it->second.first.compare("aircraft") == 0){
 			// Render for the aircraft model
-			glm::mat4 modelMatrixAircraftBlend = glm::mat4(modelMatrixAircraft);
+			/*glm::mat4 modelMatrixAircraftBlend = glm::mat4(modelMatrixAircraft);
 			modelMatrixAircraftBlend[3][1] = terrain.getHeightTerrain(modelMatrixAircraftBlend[3][0], modelMatrixAircraftBlend[3][2]) + 2.0;
-			modelAircraft.render(modelMatrixAircraftBlend);
-		}*/
+			modelAircraft.render(modelMatrixAircraftBlend);*/
+		}
 		//else if(it->second.first.compare("lambo") == 0){
 		//	// Lambo car
 		//	glm::mat4 modelMatrixLamboBlend = glm::mat4(modelMatrixLambo);
@@ -2996,7 +3003,7 @@ void renderScene(bool renderParticles){
 		//	 */
 		//}
 
-	//}
+	}
 	glEnable(GL_CULL_FACE);
 }
 
