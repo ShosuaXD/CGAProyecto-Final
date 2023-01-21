@@ -1640,6 +1640,14 @@ bool processInput(bool continueApplication) {
 		if (fabs(axes[5]) > 0.2f) {
 			animationIndex = 1; // Animacion de disparo
 		}
+
+		const unsigned char * botones = glfwGetJoystickButtons(GLFW_JOYSTICK_1, &numeroBotones);
+		std::cout << "Numero de botones: " << numeroBotones << std::endl;
+
+		if (botones[0] == GLFW_PRESS) {	// Boton A del control de Xbox one
+			// El boton puede cambiar segun el mapeo del control agregado
+			animationIndex = 3;
+		}
 	}
 
 	if (modelSelected == 2 && glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS){
